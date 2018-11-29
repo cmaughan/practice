@@ -1,12 +1,8 @@
-#include <functional>
-#include <stringutils.h>
-#include <fileutils.h>
-#include <memory>
-#include <assert.h>
-#include <cstdio>
-#include <map>
-#include <string>
+#pragma once
 
+#include <functional>
+
+#define NOMINMAX
 #include <easylogging/src/easylogging++.h>
 
 class ObjectFactory;

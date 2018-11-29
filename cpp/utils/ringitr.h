@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <string>
+#include <cassert>
 
 template <typename T, typename Container = std::vector<T>, typename Iterator = Container::iterator>
 class RingIterator
@@ -52,3 +54,6 @@ public:
     RingIterator erase() { return RingIterator(data, data.erase(cursor)); }
 };
 
+//using ringItr = RingIterator<char, std::string>;
+//using ringItrVec = RingIterator<std::string, std::vector<std::string>>;
+//using ringItrInt = RingIterator<int, std::vector<int>>;

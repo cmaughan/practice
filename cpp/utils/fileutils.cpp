@@ -7,10 +7,7 @@
 #include <filesystem>
 #include <fstream>
 
-namespace FileUtils
-{
-
-std::string ReadFile(const fs::path& fileName)
+std::string file_read(const fs::path& fileName)
 {
     std::ifstream in(fileName, std::ios::in | std::ios::binary);
     if (in)
@@ -26,7 +23,7 @@ std::string ReadFile(const fs::path& fileName)
     return std::string();
 }
 
-bool WriteFile(const fs::path& fileName, const void* pData, size_t size)
+bool file_write(const fs::path& fileName, const void* pData, size_t size)
 {
     FILE* pFile = nullptr;
     fopen_s(&pFile, fileName.string().c_str(), "wb");
@@ -38,6 +35,3 @@ bool WriteFile(const fs::path& fileName, const void* pData, size_t size)
     fclose(pFile);
     return true;
 }
-
-
-} // FileUtils

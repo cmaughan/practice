@@ -6,17 +6,14 @@
 
 #include "stringutils.h"
 
-namespace StringUtils
-{
-
-std::string toLower(const std::string& str)
+std::string string_to_lower(const std::string& str)
 {
     std::string copy = str;
     std::transform(copy.begin(),copy.end(),copy.begin(),::tolower);
     return copy;
 }
 
-std::string ReplaceString(std::string subject, const std::string& search,
+std::string string_replace(std::string subject, const std::string& search,
     const std::string& replace)
 {
     size_t pos = 0;
@@ -29,7 +26,7 @@ std::string ReplaceString(std::string subject, const std::string& search,
 
 // String split with multiple delims
 // https://stackoverflow.com/a/7408245/18942
-std::vector<std::string> Split(const std::string& text, const std::string& delims)
+std::vector<std::string> string_split(const std::string& text, const std::string& delims)
 {
     std::vector<std::string> tokens;
     std::size_t start = text.find_first_not_of(delims), end = 0;
@@ -45,9 +42,9 @@ std::vector<std::string> Split(const std::string& text, const std::string& delim
     return tokens;
 }
 
-std::vector<std::string> SplitLines(const std::string& text)
+std::vector<std::string> string_split_lines(const std::string& text)
 {
-    return Split(text, "\r\n");
+    return string_split(text, "\r\n");
 }
 
 // CM: I can't remember where this came from; please let me know if you do!
@@ -198,5 +195,3 @@ uint64_t murmur_hash_64(const void * key, uint32_t len, uint64_t seed)
     return h;
 }
 
-
-}

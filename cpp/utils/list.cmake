@@ -7,6 +7,7 @@ LIST(APPEND CPP_SOURCE
     ${CDIR}/stringutils.cpp
     ${CDIR}/stringutils.h
     ${CDIR}/utils.h
+    ${CDIR}/utils.cpp
     )
 
 LIST(APPEND CPP_INCLUDE

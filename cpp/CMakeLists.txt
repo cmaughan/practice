@@ -15,6 +15,11 @@ INCLUDE(m3rdparty/list.cmake)
 INCLUDE(utils/list.cmake)
 INCLUDE(advent_of_code/list.cmake)
 
+SET(PRACTICE_ROOT ${CMAKE_CURRENT_LIST_DIR})
+
+# config_app.h
+CONFIGURE_FILE(${CMAKE_CURRENT_LIST_DIR}/cmake/config_app.h.cmake ${CMAKE_BINARY_DIR}/config_app.h)
+
 MESSAGE(STATUS ${CPP_INCLUDE})
 INCLUDE_DIRECTORIES(
     ${CPP_INCLUDE}
