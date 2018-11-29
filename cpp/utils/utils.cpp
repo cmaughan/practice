@@ -64,7 +64,7 @@ std::vector<std::vector<int>> utils_get_integer_grid(const std::string& str)
 std::vector<int> utils_get_integers(const std::string& str)
 {
     std::vector<int> vals;
-    auto strVals = string_split(str, "\t ");
+    auto strVals = string_split(str, "\t\n\r ");
     std::transform(strVals.begin(), strVals.end(), back_inserter(vals), [](const std::string& str) { return stoi(str); });
     return vals;
 }

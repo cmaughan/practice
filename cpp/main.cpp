@@ -45,6 +45,7 @@ int main(int argc, char **argv)
                 return 1;
             }
 
+            LOG(INFO) << std::endl << "Problem: " << problemArg.getValue();
             auto pObj = pFactory->create();
             pObj->Run();
             delete pObj;

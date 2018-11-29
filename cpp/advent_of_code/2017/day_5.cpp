@@ -10,9 +10,7 @@ using namespace std;
 
 REGISTER_PROBLEM(AOC_2017_Day5)
 {
-    std::ifstream p5file(PRACTICE_ROOT  "/advent_of_code/2017/inputs/p5input.txt");
-    assert(p5file.is_open());
-    std::vector<int> jumps{ std::istream_iterator<int>{p5file}, {} };
+    auto jumps = utils_get_integers(file_read(PRACTICE_ROOT  "/advent_of_code/2017/inputs/p5input.txt"));
     int ic = 0;
     int steps = 0;
     while (ic >= 0 && ic < jumps.size())
@@ -20,11 +18,9 @@ REGISTER_PROBLEM(AOC_2017_Day5)
         ic = ic + jumps[ic]++;
         steps++;
     }
-    LOG(INFO) << "P5,1" << steps;
+    LOG(INFO) << "Part 1: " << steps;
 
-    p5file.clear();
-    p5file.seekg(0, ios::beg);
-    jumps = std::vector<int>{ std::istream_iterator<int>{p5file}, {} };
+    jumps = utils_get_integers(file_read(PRACTICE_ROOT  "/advent_of_code/2017/inputs/p5input.txt"));
     ic = 0;
     steps = 0;
     while (ic >= 0 && ic < jumps.size())
@@ -32,5 +28,5 @@ REGISTER_PROBLEM(AOC_2017_Day5)
         ic = ic + (jumps[ic] >= 3 ? jumps[ic]-- : jumps[ic]++);
         steps++;
     }
-    LOG(INFO) << "P5,2" << steps;
+    LOG(INFO) << "Part 2: " << steps;
 }
