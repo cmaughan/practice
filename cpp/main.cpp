@@ -9,6 +9,8 @@ using namespace std;
 TCLAP::ValueArg<std::string> problemArg("p", "problem", "Problem to run", false, "", "");
 TCLAP::ValueArg<std::string> dirArg("d", "data", "Data path", false, "data", "string");
 
+std::string g_CurrentProblem;
+
 INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char **argv)
@@ -41,11 +43,12 @@ int main(int argc, char **argv)
 
             if (pFactory == nullptr)
             {
-                std::cerr << "Error: " << problemArg.getValue() << " problem not found!" << std::endl;
+                LOG(ERROR) << problemArg.getValue() << " problem not found!";
                 return 1;
             }
 
             LOG(INFO) << std::endl << "Problem: " << problemArg.getValue();
+            g_CurrentProblem = problemArg.getValue();
             auto pObj = pFactory->create();
             pObj->Run();
             delete pObj;
@@ -56,6 +59,7 @@ int main(int argc, char **argv)
             for (auto& p : Object::GetFactories())
             {
                 LOG(INFO) << std::endl << "Problem: " << p.first;
+                g_CurrentProblem = p.first;
                 auto pObj = p.second->create();
                 pObj->Run();
                 delete pObj;
@@ -64,7 +68,7 @@ int main(int argc, char **argv)
     }
     catch (TCLAP::ArgException& e)
     {
-        std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl;
+        LOG(ERROR) << e.error() << " for arg " << e.argId() << std::endl;
     }
 
     system("pause");

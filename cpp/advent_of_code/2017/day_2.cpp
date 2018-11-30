@@ -31,7 +31,7 @@ REGISTER_PROBLEM(AOC_2017_Day2)
 
     // P2, 1: Find max/min for each array line, sum the min/max range into a total for all lines
     auto arrayLines = utils_get_integer_grid(str2);
-    LOG(INFO) << "P2,1" << accumulate(arrayLines.begin(), arrayLines.end(), 0, [](int range, const vector<int>& vals)
+    LOG(INFO) << "Part 1: " << accumulate(arrayLines.begin(), arrayLines.end(), 0, [](int range, const vector<int>& vals)
     {
         // Gather min max for row
         auto minMax = minmax_element(vals.begin(), vals.end());
@@ -40,7 +40,7 @@ REGISTER_PROBLEM(AOC_2017_Day2)
 
     // Find even divisors
     // Find the pair of numbers that divides and sum it
-    LOG(INFO) << "P2,2" << accumulate(arrayLines.begin(), arrayLines.end(), 0, [](int total, vector<int>& vals)
+    LOG(INFO) << "Part 2: " << accumulate(arrayLines.begin(), arrayLines.end(), 0, [](int total, vector<int>& vals)
     {
         return total + accumulate_pairs(vals, 0, [](auto ret, auto v1, auto v2)
         {

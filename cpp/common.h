@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <cassert>
 
 #define NOMINMAX
 #include <easylogging/src/easylogging++.h>

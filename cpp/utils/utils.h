@@ -7,6 +7,7 @@ count accumulate_pairs(C& container, count c, Op fun)
     {
         for (auto it2 = it + 1; it2 != container.end(); it2++)
         {
+            // Think I intended to add these?
             c = fun(c, *it, *it2);
             c = fun(c, *it2, *it);
         }
