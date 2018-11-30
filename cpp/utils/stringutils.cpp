@@ -6,6 +6,23 @@
 
 #include "stringutils.h"
 
+std::string& string_left_trim(std::string& s, const char* t)
+{
+    s.erase(0, s.find_first_not_of(t));
+    return s;
+}
+
+std::string& string_right_trim(std::string& s, const char* t)
+{
+    s.erase(s.find_last_not_of(t) + 1);
+    return s;
+}
+
+std::string& string_trim(std::string& s, const char* t)
+{
+    return string_left_trim(string_right_trim(s, t), t);
+}
+
 std::string string_to_lower(const std::string& str)
 {
     std::string copy = str;

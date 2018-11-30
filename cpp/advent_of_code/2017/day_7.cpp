@@ -63,7 +63,7 @@ REGISTER_PROBLEM(AOC_2017_Day7)
             continue;
         auto d = std::make_shared<disc>();
         d->name = towerEntry[0];
-        d->weight = stoi(Trim(towerEntry[1], "()"));
+        d->weight = stoi(string_trim(towerEntry[1], "()"));
 
         for (int index = 3; index < towerEntry.size(); index++)
         {

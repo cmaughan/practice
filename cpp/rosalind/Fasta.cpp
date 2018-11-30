@@ -62,19 +62,19 @@ Fasta::Fasta(const std::string& filePath)
                 auto location = GetToken(str, 1);
                 
                 currentState = ParseState::Data;
-                entry.name = Trim(str.substr(location.first, location.second));
+                entry.name = string_trim(str.substr(location.first, location.second));
                 
                 auto nextPos = location.first + location.second;
                 if (nextPos < str.size())
                 {
-                    entry.description = Trim(str.substr(nextPos, str.size() - nextPos));
+                    entry.description = string_trim(str.substr(nextPos, str.size() - nextPos));
                 }
             }
             else
             {
                 if (currentState == ParseState::Data)
                 {
-                    entry.data += Trim(str);
+                    entry.data += string_trim(str);
                 }
             }
         }

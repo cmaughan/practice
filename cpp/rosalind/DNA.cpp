@@ -27,7 +27,7 @@ REGISTER_PROBLEM(DNA)
         strOut << mapCount[tide] << " ";
     }
 
-    WriteOutput(RTrim(strOut.str()));
+    WriteOutput(string_right_trim(strOut.str()));
 }
 
 
