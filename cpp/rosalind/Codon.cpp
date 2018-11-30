@@ -1,7 +1,10 @@
 #include "rosalind.h"
 #include "Codon.h"
+#include "utils.h"
 #include "stringutils.h"
+#include <algorithm>
 
+using namespace std;
 Codon::Codon()
 {
     std::string codons = R"(UUU F      CUU L      AUU I      GUU V
@@ -22,32 +25,12 @@ Codon::Codon()
         UGG W      CGG R      AGG R      GGG G)";
 
     auto codonEntries = string_split(codons," ");
-
-    auto itrEntries = codonEntries.begin();
-    while (itrEntries != codonEntries.end())
-    {
-        if ((*itrEntries).empty())
-        {
-            itrEntries = codonEntries.erase(itrEntries);
-            continue;
-        }
-        itrEntries++;
-    }
-
-    auto itrFirst = codonEntries.begin();
-    while (itrFirst != codonEntries.end())
-    {
-        auto itrSecond = itrFirst + 1;
-        if (itrSecond != codonEntries.end())
-        {
-            if (*itrSecond != "Stop")
-            {
-                _entries[*itrFirst] = *itrSecond;
-            }
-        }
-
-        itrFirst = ++itrSecond;
-    };
+    _entries = utils_convert_to_pairs(codonEntries);
+    utils_erase_if(_entries, [&](const std::pair<std::string, std::string>& pair) {
+        if (pair.second == "Stop")
+            return true;
+        return false;
+    });
 }
 
 std::string Codon::Map(const std::string& str) const

@@ -15,6 +15,32 @@ count accumulate_pairs(C& container, count c, Op fun)
     return c;
 }
 
+template<typename T>
+std::map<T, T> utils_convert_to_pairs(const std::vector<T>& vals)
+{
+    std::map<T, T> pairs;
+    auto itrFirst = vals.begin();
+    while (itrFirst != vals.end())
+    {
+        auto itrSecond = itrFirst + 1;
+        if (itrSecond != vals.end())
+        {
+            pairs[*itrFirst] = *itrSecond;
+        }
+
+        itrFirst = ++itrSecond;
+    };
+    return pairs;
+}
+
+template< typename ContainerT, typename PredicateT >
+  void utils_erase_if( ContainerT& items, const PredicateT& predicate ) {
+    for( auto it = items.begin(); it != items.end(); ) {
+      if( predicate(*it) ) it = items.erase(it);
+      else ++it;
+    }
+  };
+
 std::vector<int> utils_get_integers(const std::string& str);
 std::vector<std::vector<int>> utils_get_integer_grid(const std::string& str);
 std::vector<std::vector<std::string>> utils_get_string_grid(const std::string& str);
