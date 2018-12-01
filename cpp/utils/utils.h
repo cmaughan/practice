@@ -16,7 +16,7 @@ count accumulate_pairs(C& container, count c, Op fun)
 }
 
 template<typename T>
-void utils_chunk(T& container, typename T::iterator itrStart, int size, std::function<void (typename T::iterator, typename T::iterator)> fn)
+void utils_splice(T& container, typename T::iterator itrStart, int size, std::function<void (typename T::iterator, typename T::iterator)> fn)
 {
     auto itr = itrStart;
     auto itr2 = itrStart + size;
