@@ -16,6 +16,22 @@ count accumulate_pairs(C& container, count c, Op fun)
 }
 
 template<typename T>
+void utils_chunk(T& container, typename T::iterator itrStart, int size, std::function<void (typename T::iterator, typename T::iterator)> fn)
+{
+    auto itr = itrStart;
+    auto itr2 = itrStart + size;
+    while (itr2 <= container.end())
+    {
+        fn(itr, itr2);
+        if ((container.end() - itr2) < size)
+            break;
+
+        itr = itr + size;
+        itr2 = itr2 + size;
+    }
+}
+
+template<typename T>
 std::map<T, T> utils_convert_to_pairs(const std::vector<T>& vals)
 {
     std::map<T, T> pairs;
