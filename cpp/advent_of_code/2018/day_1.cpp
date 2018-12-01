@@ -4,7 +4,6 @@
 #include "utils.h"
 
 #include <set>
-#include <algorithm>
 #include <numeric>
 
 #include "ringitr.h"
@@ -23,15 +22,9 @@ REGISTER_PROBLEM(AOC_2018_Day1)
     int result = 0;
     IntItr itr(input);
     std::set<int> visited;
-    visited.insert(result);
-    for(;;)
+    while(visited.insert(result).second)
     {
         result += *itr++;
-        if (visited.find(result) != visited.end())
-        {
-            LOG(INFO) << "Part2: " << result;
-            return;
-        }
-        visited.insert(result);
     }
+    LOG(INFO) << "Part2: " << result;
 }
