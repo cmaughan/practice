@@ -45,7 +45,6 @@ REGISTER_PROBLEM(AOC_2018_Day2)
     }
     LOG(INFO) << "Part 1: " << num_twos * num_threes;
 
-    int bestCompare = std::numeric_limits<int>::max();
     for (auto& s1 : input)
     {
         for (auto& s2 : input)
