@@ -61,6 +61,17 @@ std::vector<int> utils_get_integers(const std::string& str);
 std::vector<std::vector<int>> utils_get_integer_grid(const std::string& str);
 std::vector<std::vector<std::string>> utils_get_string_grid(const std::string& str);
 
+template <typename K, typename V>
+V utils_get_with_default(const  std::map <K, V> & m, const K & key, const V & defval) {
+    typename std::map<K, V>::const_iterator it = m.find(key);
+    if (it == m.end()) {
+        return defval;
+    }
+    else {
+        return it->second;
+    }
+}
+
 class Timer
 {
 public:
