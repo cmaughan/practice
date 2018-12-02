@@ -16,7 +16,6 @@ REGISTER_PROBLEM(AOC_2018_Day2)
 {
     auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_2.txt"));
 
-    std::vector<std::string> boxes;
     int num_twos = 0;
     int num_threes = 0;
     for (auto& s : input)
@@ -32,47 +31,44 @@ REGISTER_PROBLEM(AOC_2018_Day2)
         bool found3 = false;
         for (auto& entry : counts)
         {
-            if (entry.second == 2)
+            if (entry.second == 2 && !found2)
+            {
                 found2 = true;
-            if (entry.second == 3)
+                num_twos++;
+            }
+            if (entry.second == 3 && !found3)
+            {
                 found3 = true;
-        }
-        if (found2)
-            num_twos++;
-        if (found3)
-            num_threes++;
-        if (found2 || found3)
-        {
-            boxes.push_back(s);
+                num_threes++;
+            }
         }
     }
     LOG(INFO) << "Part 1: " << num_twos * num_threes;
 
     int bestCompare = std::numeric_limits<int>::max();
-    for (auto& s1 : boxes)
+    for (auto& s1 : input)
     {
-        for (auto& s2 : boxes)
+        for (auto& s2 : input)
         {
-            if (s2 == s1)
-                continue;
-
             // Return number of diffs and build string at the same time without the diffs!
-            std::ostringstream str;
-            int diffs = std::inner_product(s1.begin(), s1.end(), s2.begin(), 0, std::plus<>(), [&str](auto c1, auto c2)
+            if (1 == std::inner_product(s1.begin(), s1.end(), s2.begin(), 0, std::plus<>(), [](auto c1, auto c2)
             {
-                if (c1 == c2)
+                return (c1 == c2) ? 0 : 1;
+            }))
+            {
+                std::ostringstream str;
+                auto diff = std::inner_product(s1.begin(), s1.end(), s2.begin(), 0, std::plus<>(), [&str](auto c1, auto c2)
                 {
-                    str << c1;
+                    if (c1 == c2)
+                    {
+                        str << c1;
+                    }
                     return 0;
-                }
-                return 1;
-            });
+                });
 
-            if (diffs == 1)
-            {
                 LOG(INFO) << "Part 2: " << str.str();
                 return;
-            }
+            };
         }
     }
 }
