@@ -6,7 +6,7 @@
 #include <string>
 
 std::string string_replace(std::string subject, const std::string& search, const std::string& replace);
-std::vector<std::string> string_split(const std::string& text, const std::string& delims = " \t\n\v\f,");
+std::vector<std::string> string_split(const std::string& text, const std::string& delims = " \t\n\v\f\r,");
 std::vector<std::string> string_split_lines(const std::string& text);
 
 std::string& string_left_trim(std::string& s, const char* t = " \t\n\r\f\v");
