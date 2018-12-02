@@ -51,24 +51,25 @@ REGISTER_PROBLEM(AOC_2018_Day2)
     int bestCompare = std::numeric_limits<int>::max();
     for (auto& s1 : boxes)
     {
-        //qyzphxoiseldjrntfygvdmanu
         for (auto& s2 : boxes)
         {
             if (s2 == s1)
                 continue;
-            int diffs = std::inner_product(s1.begin(), s1.end(), s2.begin(), 0, std::plus<>(), [](auto c1, auto c2)
+
+            // Return number of diffs and build string at the same time without the diffs!
+            std::ostringstream str;
+            int diffs = std::inner_product(s1.begin(), s1.end(), s2.begin(), 0, std::plus<>(), [&str](auto c1, auto c2)
             {
-                return (c1 == c2) ? 0 : 1;
+                if (c1 == c2)
+                {
+                    str << c1;
+                    return 0;
+                }
+                return 1;
             });
 
             if (diffs == 1)
             {
-                std::ostringstream str;
-                for (int i = 0; i < s1.length(); i++)
-                {
-                    if (s1[i] == s2[i])
-                        str << s1[i];
-                }
                 LOG(INFO) << "Part 2: " << str.str();
                 return;
             }
