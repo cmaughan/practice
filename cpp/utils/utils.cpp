@@ -8,7 +8,7 @@
 Timer::Timer(const std::string& strName)
     : m_strName(strName)
 {
-    start = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+    start = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
     LOG(INFO) << m_strName << ": Started";
 }
 
@@ -16,8 +16,8 @@ void Timer::Stop()
 {
     if (!finished)
     {
-        auto now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-        LOG(INFO) << m_strName << ": " << (now - start) << " ms";
+        auto now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+        LOG(INFO) << m_strName << ": " << (now - start) << " us";
         finished = true;
     }
 }
