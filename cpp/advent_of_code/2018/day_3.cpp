@@ -3,10 +3,8 @@
 #include "fileutils.h"
 #include "stringutils.h"
 #include "utils.h"
-
-#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
-#include <glm/gtx/string_cast.hpp>
+
 using namespace std;
 
 REGISTER_PROBLEM(AOC_2018_Day3)
@@ -44,6 +42,7 @@ REGISTER_PROBLEM(AOC_2018_Day3)
     std::vector<int> cloth(max_rect.x * max_rect.y);
     std::fill(cloth.begin(), cloth.end(), 0);
 
+    // Walk a cloth piece, returning a ref to the value in that cloth coord
     auto walk_cloth_piece = [&](auto coord, auto size, std::function<void(int&)> fn)
     {
         auto bottom_right = coord + size;
