@@ -44,26 +44,12 @@ REGISTER_PROBLEM(AOC_2018_Day4)
         else
         {
             sleep_spans[current_guard].push_back(std::make_tuple(start_time, minute));
-            sleep_time[current_guard] += minute - start_time;
+            sleep_time[minute - start_time] = current_guard;
         }
     }
 
-    // Get sleepiest
-    int longest_sleep = 0;
-    int asleep_guard = 0;
-    for (auto& g : sleep_time)
-    {
-        if (g.second > longest_sleep)
-        {
-            longest_sleep = g.second;
-            asleep_guard = g.first;
-        }
-    }
-
-    struct default_int {
-        int count = 0;
-    };
-    
+    auto asleep_guard = sleep_time.rbegin()->second;
+    struct default_int { int count = 0; };
     std::map<int, default_int> time_to_counts;
     int biggest_time = 0;
     int found_time = 0;
