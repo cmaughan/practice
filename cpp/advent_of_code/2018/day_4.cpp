@@ -23,8 +23,8 @@ REGISTER_PROBLEM(AOC_2018_Day4)
 
     int current_guard;
     int start_time;
-    std::map<int, std::vector<std::tuple<int, int>>> sleep_spans;
     std::map<int, int> sleep_time;
+    std::map<int, std::map<int, int>> guard_to_minute_counts;
     for (auto& l : lines)
     {
         int year, hour, month, day, minute;
@@ -43,64 +43,38 @@ REGISTER_PROBLEM(AOC_2018_Day4)
         }
         else
         {
-            sleep_spans[current_guard].push_back(std::make_tuple(start_time, minute));
             sleep_time[minute - start_time] = current_guard;
+            for (int i = start_time; i < minute; i++)
+            {
+                guard_to_minute_counts[current_guard][i]++;
+            }
         }
     }
 
     auto asleep_guard = sleep_time.rbegin()->second;
-    struct default_int { int count = 0; };
-    std::map<int, default_int> time_to_counts;
-    int biggest_time = 0;
-    int found_time = 0;
-    for (auto& s : sleep_spans[asleep_guard])
+    auto itr = std::max_element(guard_to_minute_counts[asleep_guard].begin(), guard_to_minute_counts[asleep_guard].end(), [](auto v1, auto v2)
     {
-        for (auto i = std::get<0>(s); i < std::get<1>(s); i++)
-        {
-            time_to_counts[i].count++;
-            if (time_to_counts[i].count > biggest_time)
-            {
-                biggest_time = time_to_counts[i].count;
-                found_time = i;
-            }
-        }
-    }
-    LOG(INFO) << "Part 1: " << asleep_guard * found_time;
+        return v1.second < v2.second;
+    });
+
+    LOG(INFO) << "Part 1: " << asleep_guard * itr->first;
 
     int max_sleep_minute = 0;
     int max_minute = 0;
     int max_sleep_guard = 0;
-    for (auto& g : sleep_spans)
+    for (auto& g : guard_to_minute_counts)
     {
-        map<int, int> minute_counts;
-        auto guard = g.first;
-        auto spans = g.second;
-        for (auto& s : spans)
+        auto itr = std::max_element(g.second.begin(), g.second.end(), [](auto v1, auto v2)
         {
-            for (auto i = std::get<0>(s); i < std::get<1>(s); i++)
-            {
-                minute_counts[i]++;
-            }
-        }
-
-        // Get this guard's best
-        int max = 0;
-        int minute = 0;
-        for (auto& c : minute_counts)
-        {
-            if (c.second > max)
-            {
-                max = c.second;
-                minute = c.first;
-            }
-        }
+            return v1.second < v2.second;
+        });
 
         // Check if this guard beats the others
-        if (max > max_sleep_minute)
+        if (itr->second > max_sleep_minute)
         {
-            max_sleep_minute = max;
-            max_sleep_guard = guard;
-            max_minute = minute;
+            max_sleep_minute = itr->second;
+            max_sleep_guard = g.first;
+            max_minute = itr->first;
         }
     }
     LOG(INFO) << "Part 2: " << max_sleep_guard * max_minute;
