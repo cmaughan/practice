@@ -34,7 +34,7 @@ std::vector<std::vector<std::string>> utils_get_string_grid(const std::string& s
     std::vector<std::vector<std::string>> arrayLines;
     for (auto& line : lines)
     {
-        std::vector<std::string> vals = string_split(line, "\t ");
+        std::vector<std::string> vals = string_split(line, "\t, ");
         if (!vals.empty())
         {
             arrayLines.push_back(vals);
