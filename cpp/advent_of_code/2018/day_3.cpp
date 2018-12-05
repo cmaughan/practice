@@ -39,11 +39,10 @@ REGISTER_PROBLEM(AOC_2018_Day3)
     }
 
     // Make the cloth
-    std::vector<int> cloth(max_rect.x * max_rect.y);
-    std::fill(cloth.begin(), cloth.end(), 0);
+    std::vector<int> cloth(max_rect.x * max_rect.y, 0);
 
     // Walk a cloth piece, returning a ref to the value in that cloth coord
-    auto walk_cloth_piece = [&](auto coord, auto size, std::function<void(int&)> fn)
+    auto walk_cloth_piece = [&](auto coord, auto size, auto fn)
     {
         auto bottom_right = coord + size;
         for (int x = coord.x; x < bottom_right.x; x++)
@@ -68,11 +67,7 @@ REGISTER_PROBLEM(AOC_2018_Day3)
     for (auto& c : cuts)
     {
         bool found = true;
-        walk_cloth_piece(c.coord, c.size, [&found](int& val)
-        {
-            if (val > 1)
-                found = false;
-        });
+        walk_cloth_piece(c.coord, c.size, [&found](int& val) { if (val > 1) found = false; });
 
         if (found)
         {
