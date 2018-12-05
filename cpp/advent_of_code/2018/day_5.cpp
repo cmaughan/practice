@@ -40,12 +40,13 @@ REGISTER_PROBLEM(AOC_2018_Day5)
     char best;
     auto best_size = std::numeric_limits<int>::max();
     std::map<char, std::string> results;
-    for (char c = 'a'; c <= 'z'; c++)
+    for (char c = 'A'; c <= 'Z'; c++)
     {
-        std::string output;
-        string_replace(input2, std::string(1, c), output);
-        string_replace(output, std::string(1, char(c + diff)), output);
+        std::string output = input2;
+        output = string_replace(output, std::string(1, c), "");
+        output = string_replace(output, std::string(1, char(c + diff)), "");
 
+        process(output);
         if (output.length() < best_size)
         {
             results[c] = output;
@@ -54,7 +55,7 @@ REGISTER_PROBLEM(AOC_2018_Day5)
         }
     }
 
-    LOG(INFO) << "Part 2: " << results.begin()->first;
+    LOG(INFO) << "Part 2: " << results[best].size();
 
 }
 
