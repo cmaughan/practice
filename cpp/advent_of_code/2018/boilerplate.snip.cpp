@@ -7,7 +7,7 @@
 
 using namespace std;
 
-REGISTER_PROBLEM(AOC_2018_Day5)
+REGISTER_PROBLEM(Problem1)
 {
     /*std::istringstream iss(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt"));
     std::vector<string> lines;

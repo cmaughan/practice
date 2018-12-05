@@ -5,10 +5,8 @@
 #include "utils.h"
 #include <glm/glm.hpp>
 #include <set>
-#include "date/include/date/date.h"
 
 using namespace std;
-using namespace date;
 using namespace chrono;
 
 REGISTER_PROBLEM(AOC_2018_Day4)

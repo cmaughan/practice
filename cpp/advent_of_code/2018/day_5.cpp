@@ -9,24 +9,52 @@ using namespace std;
 
 REGISTER_PROBLEM(AOC_2018_Day5)
 {
-    /*std::istringstream iss(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt"));
-    std::vector<string> lines;
-    for (std::string line; std::getline(iss, line); )
+    auto text = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt");
+    //auto input = std::string("dabAcCaCBAcCcaDA");
+    char diff = std::abs('A' - 'a');
+
+    auto process = [&](std::string& input)
     {
-        lines.push_back(line);
-    }
-    std::sort(lines.begin(), lines.end());
-    for (auto& l : lines)
-    {
-        int year, hour, month, day, minute;
-        sscanf(l.c_str(), "[%d-%d-%d %d:%d] %s %s", &year, &month, &day, &hour, &minute, word1, word2);
-    }
-    */
-    
-    //auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_2.txt"));
+        int index = 0;
+        while (index < input.size())
+        {
+            if (index > 0)
+            {
+                auto char_diff = std::abs(input[index] - input[index - 1]);
+                if (char_diff == diff)
+                {
+                    input.erase(input.begin() + index - 1, input.begin() + index + 1);
+                    index -= 1;
+                    index = std::max(0, index);
+                    continue;
+                }
+            }
+            index++;
+        }
+    };
+    process(text);
+    LOG(INFO) << "Part 1: " << text.size();
 
 
-    LOG(INFO) << "Part 1: " << 1;
-    LOG(INFO) << "Part 2: " << 2;
+    auto input2 = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt");
+    char best;
+    auto best_size = std::numeric_limits<int>::max();
+    std::map<char, std::string> results;
+    for (char c = 'a'; c <= 'z'; c++)
+    {
+        std::string output;
+        string_replace(input2, std::string(1, c), output);
+        string_replace(output, std::string(1, char(c + diff)), output);
+
+        if (output.length() < best_size)
+        {
+            results[c] = output;
+            best_size = (int)output.length();
+            best = c;
+        }
+    }
+
+    LOG(INFO) << "Part 2: " << results.begin()->first;
+
 }
 
