@@ -17,6 +17,7 @@ auto sample_input = std::string(R"(1, 1
 
 REGISTER_PROBLEM(AOC_2018_Day6)
 {
+    Timer t("Part1: ");
     std::vector<glm::ivec2> coords;
     glm::ivec2 size(0);
     auto input = utils_get_integer_grid(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_6.txt"));
@@ -53,6 +54,8 @@ REGISTER_PROBLEM(AOC_2018_Day6)
         }
     }
 
+    // Print the grid!
+    /*
     std::ostringstream str;
     for (int y = 0; y < size.y; y++)
     {
@@ -71,13 +74,14 @@ REGISTER_PROBLEM(AOC_2018_Day6)
         str << std::endl;
     }
     std::cout << str.str();
-    //file_write("out.txt", str.str().c_str(), str.str().length());
+    */
 
     std::map<int, int> owner_counts;
     for (int i = 0; i < coords.size(); i++)
     {
         owner_counts[i] = 0;
     }
+
     for (int x = 0; x < size.x; x++)
     {
         for (int y = 0; y < size.y; y++)
@@ -87,6 +91,7 @@ REGISTER_PROBLEM(AOC_2018_Day6)
             {
                 if (x == 0 || y == 0 || x == (size.x - 1) || y == (size.y - 1))
                 {
+                    // Remove if seen at the boundary
                     if (cell.owner != -1)
                     {
                         owner_counts.erase(cell.owner);
@@ -110,23 +115,28 @@ REGISTER_PROBLEM(AOC_2018_Day6)
             id = m.first;
         }
     }
+    t.Stop();
 
     LOG(INFO) << "Part 1: " << max;
+    Timer t2("Part2 : ");
 
+    // Find the distances < 10000
     int under = 0;
-    for (int x = -10000 - size.x; x < 10000 + size.x; x++)
+    const int max_size = 200;
+    const int compare = 10000;
+    for (int x = -max_size - size.x; x < max_size + size.x; x++)
     {
-        for (int y = -10000; y < size.y + 10000; y++)
+        for (int y = -max_size; y < size.y + max_size; y++)
         {
             int total = 0;
             for (int owner = 0; owner < coords.size(); owner++)
             {
                 auto coord = coords[owner];
                 total += std::abs(coord.x - x) + std::abs(coord.y - y);
-                if (total >= 10000)
+                if (total >= compare)
                     break;
             }
-            if (total < 10000)
+            if (total < compare)
             {
                 under++;
             }

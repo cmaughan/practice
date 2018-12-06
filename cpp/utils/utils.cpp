@@ -18,6 +18,8 @@ void Timer::Stop()
     {
         auto now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
         LOG(INFO) << m_strName << ": " << (now - start) << " us";
+        
+        LOG(INFO) << m_strName << ": " << (now - start) / 1000 << " ms";
         finished = true;
     }
 }
