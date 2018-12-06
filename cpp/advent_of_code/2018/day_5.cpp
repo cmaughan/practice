@@ -33,6 +33,7 @@ REGISTER_PROBLEM(AOC_2018_Day5)
         }
     };
     process(text);
+    
     LOG(INFO) << "Part 1: " << text.size();
 
 
@@ -43,8 +44,7 @@ REGISTER_PROBLEM(AOC_2018_Day5)
     for (char c = 'A'; c <= 'Z'; c++)
     {
         std::string output = input2;
-        output = string_replace(output, std::string(1, c), "");
-        output = string_replace(output, std::string(1, char(c + diff)), "");
+        output.erase(std::remove_if(output.begin(), output.end(), [diff,c](auto ch) { return ch == c || ch == (c + diff); }), output.end());
 
         process(output);
         if (output.length() < best_size)
