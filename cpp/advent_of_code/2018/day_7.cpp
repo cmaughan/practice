@@ -16,14 +16,11 @@ REGISTER_PROBLEM(AOC_2018_Day7)
     std::vector<string> lines;
     for (std::string line; std::getline(iss, line); )
     {
-        char word[20];
-        char finished[2];
-        char next[2];
-        sscanf(line.c_str(), "%s %s %s %s %s %s %s %s", word, finished, word, word, word, word, word, next);
-        pre_required[next[0]].insert(finished[0]);
-        if (pre_required.find(finished[0]) == pre_required.end())
+        auto vals = std::make_pair( line[5], line[36] );
+        pre_required[vals.second].insert(vals.first);
+        if (pre_required.find(vals.first) == pre_required.end())
         {
-            pre_required[finished[0]] = {};
+            pre_required[vals.first] = {};
         }
     }
 
@@ -44,17 +41,8 @@ REGISTER_PROBLEM(AOC_2018_Day7)
         };
     
         // A worker 'thread'
-        struct worker
-        {
-            char c = 0;
-            int remaining = 0;
-        };
+        struct worker { char c = 0; int remaining = 0; };
         std::vector<worker> workers(numWorkers);
-
-        // Tick the workers
-        auto do_work = [&]()
-        {
-        };
 
         std::set<char> assigned;
         do
