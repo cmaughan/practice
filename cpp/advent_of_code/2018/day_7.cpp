@@ -79,21 +79,33 @@ REGISTER_PROBLEM(AOC_2018_Day7)
         };
         std::vector<worker> workers(numWorkers);
 
-        // Next empty worker in the pool
-        auto find_empty_worker = [&]() -> worker*
-        {
-            for (auto& w : workers)
-            {
-                if (w.remaining == 0)
-                    return &w;
-            }
-            return nullptr;
-        };
-
         // Tick the workers
         auto do_work = [&]()
         {
-            bool did_work = false;
+        };
+
+        std::set<char> assigned;
+        do
+        {
+            // Schedule work
+            for (auto& p : pre_req)
+            {
+                if (pre_req[p.first].empty() && assigned.find(p.first) == assigned.end())
+                {
+                    auto itr = std::find_if(workers.begin(), workers.end(), [&workers](worker& worker) { return worker.remaining == 0; });
+                    if (itr != workers.end())
+                    {
+                        itr->c = p.first;
+                        itr->remaining = itr->c - 'A' + 1 + 60;
+                        assigned.insert(itr->c);
+                        str << itr->c;
+                    }
+                }
+            }
+
+            // Do work
+            time++;
+
             for (auto& w : workers)
             {
                 if (w.remaining > 0)
@@ -105,34 +117,9 @@ REGISTER_PROBLEM(AOC_2018_Day7)
                         remove_requirement(w.c);
                         w.c = 0;
                     }
-                    did_work = true;
-                }
-            }
-            return did_work;
-        };
-
-        std::set<char> assigned;
-        do
-        {
-            // Schedule work
-            for (auto& p : pre_req)
-            {
-                if (pre_req[p.first].empty() && assigned.find(p.first) == assigned.end())
-                {
-                    auto w = find_empty_worker();
-                    if (w)
-                    {
-                        w->c = p.first;
-                        w->remaining = w->c - 'A' + 1 + 60;
-                        assigned.insert(w->c);
-                        str << w->c;
-                    }
                 }
             }
 
-            // Do work
-            time++;
-            do_work();
         } while (!pre_req.empty());
         return { str.str(), time };
     };
