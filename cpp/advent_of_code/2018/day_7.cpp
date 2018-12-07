@@ -21,32 +21,11 @@ REGISTER_PROBLEM(AOC_2018_Day7)
         char next[2];
         sscanf(line.c_str(), "%s %s %s %s %s %s %s %s", word, finished, word, word, word, word, word, next);
         pre_required[next[0]].insert(finished[0]);
-    }
-
-    // Walk the pre required, and store all other pre-required
-    // Map Char->All Chars before it
-    bool added = false;
-    do
-    {
-        added = false;
-        for (auto& pre_char : pre_required)
+        if (pre_required.find(finished[0]) == pre_required.end())
         {
-            for (;;)
-            {
-                std::set<char> keys = pre_char.second;
-                for (auto& key : keys)
-                {
-                    pre_char.second.insert(pre_required[key].begin(), pre_required[key].end());
-                }
-                if (keys.size() != pre_char.second.size())
-                {
-                    added = true;
-                    continue;
-                }
-                break;
-            }
+            pre_required[finished[0]] = {};
         }
-    } while (added);
+    }
 
     auto walk = [&](int numWorkers, std::map<char, std::set<char>> pre_req)
         -> std::pair<std::string, int>
