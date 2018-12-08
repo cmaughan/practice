@@ -4,51 +4,27 @@
 #include "stringutils.h"
 #include "utils.h"
 #include <glm/glm.hpp>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
 
 REGISTER_PROBLEM(AOC_2018_Day8)
 {
-    //auto s = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt");
-
-    std::vector<uint8_t> contents;
-    std::ifstream in(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt", std::ios::in | std::ios::binary);
-    if (in)
+    std::ostringstream str;
+    auto contents = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt");
+    //contents = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2";
+    // Hack the input - binary?!
+    uint8_t* p = (uint8_t*)&contents[0];
+    while (p != (uint8_t*)&contents[contents.size()])
     {
-        in.seekg(0, std::ios::end);
-        contents.resize(size_t(in.tellg()));
-        in.seekg(0, std::ios::beg);
-        in.read((char*)&contents[0], contents.size());
-        in.close();
+        if (*p != 0 && *p != 0xFF && *p != 0xFE)
+        {
+            str << p;
+        }
+        p++;
     }
-
-    std::vector<int> input;
-    for (auto entry : contents)
-    {
-        if (entry == 0)
-            continue;
-        if (entry == 0xFF)
-            continue;
-        if (entry == 32)
-            continue;
-        if (entry == 0xFE)
-            continue;
-        //if (entry == 0 || entry == 32 || entry = 0xFF || entry == 0xFE)
-        //    continue;
-        input.push_back(entry - '0');
-    }
-
-    input = std::vector<int>({ 2, 3,  0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2 });
-    /*return std::string();
-    std::vector<int> input;
-    for (int i = 0; i < s.size(); i++)
-    {
-        if (s[i] == 0 || s[i] == 0xFF || s[i] == 0xFE || s[i] == 0x20)
-            continue;
-        input.push_back(s[i]);j
-    }*/
-    //auto in_text = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt");
-    //auto input = utils_get_integers(in_text);
+    auto input = utils_get_integers(str.str());
 
     struct node
     {
@@ -60,8 +36,8 @@ REGISTER_PROBLEM(AOC_2018_Day8)
     node* pCurrent = pRoot;
 
     int meta_count = 0;
-    std::function<void(std::vector<int>::iterator, node* pParent)> fnParse;
-    fnParse = [&](std::vector<int>::iterator itr, node* pParent)
+    std::function<void(std::vector<int>::iterator&, node* pParent)> fnParse;
+    fnParse = [&](std::vector<int>::iterator& itr, node* pParent)
     {
         node* pNewNode = new node();
         pNewNode->parent = pParent;
@@ -81,8 +57,29 @@ REGISTER_PROBLEM(AOC_2018_Day8)
     };
 
     fnParse(input.begin(), pRoot);
-
     LOG(INFO) << "Part 1: " << meta_count;
-    LOG(INFO) << "Part 2: " << 2;
+   
+    meta_count = 0;
+    std::function<void(node*)> fnVisit;
+    fnVisit = [&](node* pNode)
+    {
+        if (pNode->children.empty())
+        {
+            meta_count += std::accumulate(pNode->meta_data.begin(), pNode->meta_data.end(), 0, [](int total, int val) { return total + val; });
+        }
+        for (auto& child_index : pNode->meta_data)
+        {
+            if (pNode->children.size() > (child_index -1))
+            {
+                fnVisit(pNode->children[child_index - 1]);
+            }
+        }
+    };
+    for (auto pVisit : pRoot->children)
+    {
+        fnVisit(pVisit);
+    }
+
+    LOG(INFO) << "Part 2: " << meta_count;
 }
 
