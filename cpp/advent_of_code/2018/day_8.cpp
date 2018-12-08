@@ -6,25 +6,14 @@
 #include <glm/glm.hpp>
 #include <algorithm>
 #include <numeric>
+#include <fstream>
 
 using namespace std;
 
 REGISTER_PROBLEM(AOC_2018_Day8)
 {
     std::ostringstream str;
-    auto contents = file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt");
-    //contents = "2 3 0 3 10 11 12 1 1 0 1 99 2 1 1 2";
-    // Hack the input - binary?!
-    uint8_t* p = (uint8_t*)&contents[0];
-    while (p != (uint8_t*)&contents[contents.size()])
-    {
-        if (*p != 0 && *p != 0xFF && *p != 0xFE)
-        {
-            str << p;
-        }
-        p++;
-    }
-    auto input = utils_get_integers(str.str());
+    auto input = utils_get_integers(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_8.txt"));
 
     struct node
     {
@@ -58,7 +47,7 @@ REGISTER_PROBLEM(AOC_2018_Day8)
 
     fnParse(input.begin(), pRoot);
     LOG(INFO) << "Part 1: " << meta_count;
-   
+
     meta_count = 0;
     std::function<void(node*)> fnVisit;
     fnVisit = [&](node* pNode)
@@ -69,7 +58,7 @@ REGISTER_PROBLEM(AOC_2018_Day8)
         }
         for (auto& child_index : pNode->meta_data)
         {
-            if (pNode->children.size() > (child_index -1))
+            if (pNode->children.size() > (child_index - 1))
             {
                 fnVisit(pNode->children[child_index - 1]);
             }
