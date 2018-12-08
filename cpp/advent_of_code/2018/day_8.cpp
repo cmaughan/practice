@@ -37,6 +37,8 @@ REGISTER_PROBLEM(AOC_2018_Day8)
         //    continue;
         input.push_back(entry - '0');
     }
+
+    input = std::vector<int>({ 2, 3,  0, 3, 10, 11, 12, 1, 1, 0, 1, 99, 2, 1, 1, 2 });
     /*return std::string();
     std::vector<int> input;
     for (int i = 0; i < s.size(); i++)
