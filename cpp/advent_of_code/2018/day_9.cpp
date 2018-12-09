@@ -54,9 +54,7 @@ REGISTER_PROBLEM(AOC_2018_Day9)
         currentMarble++;
         itrPlayer++;
 
-        if (currentMarble > maxCount)
-            break;
-    } while (true);
+    } while (currentMarble <= maxCount);
  
     auto itrElf = std::max_element(players.begin(), players.end());
 
