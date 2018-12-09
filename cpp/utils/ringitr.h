@@ -14,7 +14,7 @@ public:
     using iterator_category = std::bidirectional_iterator_tag;
 
 private:
-    const Container& data;
+    Container& data;
     Iterator   cursor;
     Iterator   begin;
     Iterator   end;
@@ -52,6 +52,17 @@ public:
     RingIterator operator--(int) { RingIterator ring = *this; --*this; return ring; }
     RingIterator insert(const T& x) { return RingIterator(data, data.insert(cursor, x)); }
     RingIterator erase() { return RingIterator(data, data.erase(cursor)); }
+    RingIterator insertAfter(const T& x) 
+    {
+        if (cursor != end)
+        {
+            return RingIterator(data, data.insert(++cursor, x));
+        }
+        else
+        {
+            return RingIterator(data, data.insert(cursor, x));
+        }
+    }
 };
 
 //using ringItr = RingIterator<char, std::string>;

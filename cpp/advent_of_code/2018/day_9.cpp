@@ -5,28 +5,62 @@
 #include "utils.h"
 #include <glm/glm.hpp>
 
+#include "ringitr.h"
 using namespace std;
 
-REGISTER_PROBLEM(Problem1)
+REGISTER_PROBLEM(AOC_2018_Day9)
 {
-    /*std::istringstream iss(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt"));
-    std::vector<string> lines;
-    for (std::string line; std::getline(iss, line); )
-    {
-        lines.push_back(line);
-    }
-    std::sort(lines.begin(), lines.end());
-    for (auto& l : lines)
-    {
-        int year, hour, month, day, minute;
-        sscanf(l.c_str(), "[%d-%d-%d %d:%d] %s %s", &year, &month, &day, &hour, &minute, word1, word2);
-    }
-    */
-    
-    //auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_2.txt"));
+    Timer t("Timer");
+    using ringItrInt = RingIterator<uint64_t, std::list<uint64_t>>;
 
+    uint64_t playerCount = 441;
+    uint64_t maxCount = 71032 * 100;
+    std::list<uint64_t> players(playerCount, 0);
+    auto itrPlayer = ringItrInt(players);
 
-    LOG(INFO) << "Part 1: " << 1;
+    std::list<uint64_t> marbles;
+    auto itr = ringItrInt(marbles);
+
+    int currentMarble = 0;
+    do
+    {
+        if (currentMarble != 0 &&
+            (currentMarble % 23) == 0)
+        {
+            *itrPlayer += currentMarble;
+            for (int i = 0; i <= 7; i++)
+            {
+                itr--;
+            }
+            *itrPlayer += *itr;
+            itr = itr.erase();
+            itr++;
+        }
+        else
+        {
+            itr = itr.insertAfter(currentMarble);
+            itr++;
+        }
+        
+        /*
+        std::ostringstream str;
+        for (auto& mar : marbles)
+        {
+            str << mar << " ";
+        }
+        std::cout << str.str() << std::endl;
+        */
+
+        currentMarble++;
+        itrPlayer++;
+
+        if (currentMarble > maxCount)
+            break;
+    } while (true);
+ 
+    auto itrElf = std::max_element(players.begin(), players.end());
+
+    LOG(INFO) << "Part 1: " << *itrElf;
     LOG(INFO) << "Part 2: " << 2;
 }
 
