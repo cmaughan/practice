@@ -6,18 +6,21 @@
 #include <glm/glm.hpp>
 
 #include "ringitr.h"
+#include "utils/Allocator.h"
 using namespace std;
 
 REGISTER_PROBLEM(AOC_2018_Day9)
 {
     Timer t("Timer");
-    using ringItrInt = RingIterator<uint64_t, std::list<uint64_t>>;
 
     uint64_t playerCount = 441;
     uint64_t maxCount = 71032 * 100;
+    
+    using ringItrIntPlayers = RingIterator<uint64_t, std::list<uint64_t>>;
     std::list<uint64_t> players(playerCount, 0);
-    auto itrPlayer = ringItrInt(players);
+    auto itrPlayer = ringItrIntPlayers(players);
 
+    using ringItrInt = RingIterator<uint64_t, std::list<uint64_t>>;
     std::list<uint64_t> marbles;
     auto itr = ringItrInt(marbles);
 
