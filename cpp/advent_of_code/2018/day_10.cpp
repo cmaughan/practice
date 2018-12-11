@@ -73,6 +73,7 @@ REGISTER_PROBLEM(AOC_2018_Day10)
                 get(p.pos - min) = '#';
             }
 
+            std::cout.clear();
             // .. print it
             std::ostringstream str;
             for (int y = 0; y < size.y; y++)
