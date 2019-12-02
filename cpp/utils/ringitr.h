@@ -19,7 +19,6 @@ private:
     Iterator   begin;
     Iterator   end;
 
-
 public:
     RingIterator(Container& v) : data(v), cursor(v.begin()), begin(v.begin()), end(v.end()) {}
     RingIterator(Container& v, const Iterator& i) : data(v), cursor(i), begin(v.begin()), end(v.end()) {}
