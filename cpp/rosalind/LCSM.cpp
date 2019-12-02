@@ -2,7 +2,9 @@
 #include <queue>
 #include <set>
 #include <string>
+
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(LCSM)
 {

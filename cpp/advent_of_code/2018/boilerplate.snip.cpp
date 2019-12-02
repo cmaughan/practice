@@ -3,9 +3,11 @@
 #include "fileutils.h"
 #include "stringutils.h"
 #include "utils.h"
+
 #include <glm/glm.hpp>
 
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(Problem1)
 {

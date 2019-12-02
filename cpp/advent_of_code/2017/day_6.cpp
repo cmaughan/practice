@@ -5,6 +5,8 @@
 #include <set>
 #include "ringitr.h"
 
+using namespace MUtils;
+
 REGISTER_PROBLEM(AOC_2017_Day6)
 {
     using ringItrInt = RingIterator<int, std::vector<int>>;

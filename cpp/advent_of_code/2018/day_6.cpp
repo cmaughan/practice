@@ -7,6 +7,7 @@
 #include <algorithm>
 
 using namespace std;
+using namespace MUtils;
 
 auto sample_input = std::string(R"(1, 1
 1, 6

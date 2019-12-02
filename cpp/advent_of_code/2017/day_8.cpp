@@ -4,7 +4,10 @@
 
 #include <cassert>
 #include <limits>
+#include <fstream>
+
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2017_Day8)
 {

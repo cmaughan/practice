@@ -5,21 +5,17 @@
 #include <map>
 
 using namespace std;
+using namespace MUtils;
 
 TCLAP::ValueArg<std::string> problemArg("p", "problem", "Problem to run", false, "", "");
 TCLAP::ValueArg<std::string> dirArg("d", "data", "Data path", false, "data", "string");
 
 std::string g_CurrentProblem;
 
-INITIALIZE_EASYLOGGINGPP
-
 int main(int argc, char **argv)
 {
     try
     {
-        el::Configurations conf(std::string(PRACTICE_ROOT "/logger.conf"));
-        el::Loggers::reconfigureAllLoggers(conf);
-
         // Parse the command line
         TCLAP::CmdLine cmd("AOC", ' ', "1.0");
         cmd.setExceptionHandling(false);
@@ -47,7 +43,7 @@ int main(int argc, char **argv)
                 return 1;
             }
 
-            LOG(INFO) << std::endl << "Problem: " << problemArg.getValue();
+            LOG(INFO) << "\nProblem: " << problemArg.getValue();
             g_CurrentProblem = problemArg.getValue();
             auto pObj = pFactory->create();
             pObj->Run();
@@ -58,7 +54,7 @@ int main(int argc, char **argv)
         {
             for (auto& p : Object::GetFactories())
             {
-                LOG(INFO) << std::endl << "Problem: " << p.first;
+                LOG(INFO) << "\nProblem: " << p.first;
                 g_CurrentProblem = p.first;
                 auto pObj = p.second->create();
                 pObj->Run();
@@ -68,7 +64,7 @@ int main(int argc, char **argv)
     }
     catch (TCLAP::ArgException& e)
     {
-        LOG(ERROR) << e.error() << " for arg " << e.argId() << std::endl;
+        LOG(ERROR) << e.error() << " for arg " << e.argId();
     }
 
     system("pause");

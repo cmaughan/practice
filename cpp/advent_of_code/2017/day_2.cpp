@@ -4,8 +4,10 @@
 #include "ringitr.h"
 
 #include <numeric>
+#include <algorithm>
 
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2017_Day2)
 {

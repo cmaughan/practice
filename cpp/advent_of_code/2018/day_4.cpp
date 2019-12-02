@@ -8,6 +8,7 @@
 
 using namespace std;
 using namespace chrono;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2018_Day4)
 {

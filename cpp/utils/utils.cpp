@@ -2,7 +2,10 @@
 #include "utils.h"
 #include "stringutils.h"
 
+#include <algorithm>
 #include <chrono>
+
+using namespace MUtils;
 
 // Timer class
 Timer::Timer(const std::string& strName)

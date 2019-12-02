@@ -6,6 +6,7 @@
 #include <vector>
 
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(CONS)
 {

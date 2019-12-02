@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2018_Day5)
 {

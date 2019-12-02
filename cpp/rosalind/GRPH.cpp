@@ -1,6 +1,8 @@
 #include "rosalind.h"
 #include <queue>
+
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(GRPH)
 {

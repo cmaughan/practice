@@ -10,7 +10,9 @@
 #include <cstdint>
 #include <numeric>
 #include <glm/glm.hpp>
+
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2017_Day11)
 {
