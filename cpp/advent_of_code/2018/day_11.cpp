@@ -10,24 +10,44 @@ using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2018_Day11)
 {
-    /*std::istringstream iss(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt"));
-    std::vector<string> lines;
-    for (std::string line; std::getline(iss, line); )
+    uint64_t input = 3628;
+    uint64_t max_power = 0;
+    glm::ivec2 best;
+    int width = 300;
+    std::vector<uint64_t> vals;
+    auto val = [&](int x, int y)
+        -> uint64_t &
     {
-        lines.push_back(line);
-    }
-    std::sort(lines.begin(), lines.end());
-    for (auto& l : lines)
+        return vals[y * width + x];
+    };
+
+    for (int y = 1; y < 301; y++)
     {
-        int year, hour, month, day, minute;
-        sscanf(l.c_str(), "[%d-%d-%d %d:%d] %s %s", &year, &month, &day, &hour, &minute, word1, word2);
+        for (int x = 1; x < 301; x++)
+        {
+            uint64_t rackID = x + 10;
+            uint64_t power = rackID * y;
+            power += input;
+            power = power * rackID;
+            auto str = std::to_string(power);
+            if (str.length() < 3)
+            {
+                power = 0;
+            }
+            else
+            {
+                power = str[str.size() - 3] - '0';
+            }
+            power -= 5;
+            if (power > max_power)
+            {
+                max_power = power;
+                best = glm::ivec2(x, y);
+            }
+        }
     }
-    */
-    
-    //auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_2.txt"));
 
-
-    LOG(INFO) << "Part 1: " << 1;
+    LOG(INFO) << "Part 1: " << best.x << ", " << best.y;
     LOG(INFO) << "Part 2: " << 2;
 }
 
