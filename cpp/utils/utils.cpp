@@ -5,11 +5,11 @@
 #include <chrono>
 
 // Timer class
-Timer::Timer(const std::string& strName)
-    : m_strName(strName)
+Timer::Timer(const std::string& strName, bool micro)
+    : m_strName(strName),
+    m_micro(micro)
 {
     start = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-    LOG(INFO) << m_strName << ": Started";
 }
 
 void Timer::Stop()
@@ -17,9 +17,15 @@ void Timer::Stop()
     if (!finished)
     {
         auto now = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-        LOG(INFO) << m_strName << ": " << (now - start) << " us";
-        
-        LOG(INFO) << m_strName << ": " << (now - start) / 1000 << " ms";
+
+        if (m_micro)
+        {
+            LOG(INFO) << m_strName << ": " << (now - start) << " us";
+        }
+        else
+        {
+            LOG(INFO) << m_strName << ": " << (now - start) / 1000 << " ms";
+        }
         finished = true;
     }
 }

@@ -75,7 +75,7 @@ V utils_get_with_default(const  std::map <K, V> & m, const K & key, const V & de
 class Timer
 {
 public:
-    Timer(const std::string& strName);
+    Timer(const std::string& strName, bool micro = false);
     ~Timer();
 
     void Stop();
@@ -84,6 +84,7 @@ private:
     int64_t start;
     int64_t now;
     std::string m_strName;
+    bool m_micro = false;
 };
 
 

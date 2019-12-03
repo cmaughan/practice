@@ -1,0 +1,371 @@
+Line: Bakerloo
+Elephant & Castle
+Lambeth North
+Waterloo
+Embankment
+Charing Cross
+Piccadilly Circus
+Oxford Circus
+Regent's Park
+Baker Street
+Marylebone
+Edgware Road
+Paddington
+Warwick Avenue
+Maida Vale
+Kilburn Park
+Queen's Park
+Kensal Green
+Willesden Junction
+Harlesden
+Stonebridge Park
+Wembley Central
+North Wembley
+South Kenton
+Kenton
+Harrow & Wealdstone
+Line: Central
+Epping
+Theydon Bois
+Debden
+Loughton
+Buckhurst Hill
+Grange Hill
+Chigwell
+Roding Valley
+Woodford
+South Woodford
+Snaresbrook
+Hainault
+Fairlop
+Barkingside
+Newbury Park
+Gants Hill
+Redbridge
+Wanstead
+Leytonstone
+Leyton
+Stratford
+Mile End
+Bethnal Green
+Liverpool Street
+Bank
+St.Paul's
+Chancery Lane
+Holborn
+Tottenham Court Road
+Oxford Circus					
+Bond Street
+Marble Arch
+Lancaster Gate
+Queensway
+Notting Hill Gate
+Holland Park
+Shepherd's Bush
+White City
+East Acton
+North Acton
+West Acton
+Ealing Broadway
+Hanger Lane
+Perivale
+Greenford
+Northolt
+South Ruislip
+Ruislip Gardens
+West Ruislip
+Line: Hammersmith & City
+Hammersmith
+Goldhawk Road
+Shepherd's Bush
+Latimer Road
+Ladbroke Grove
+Westbourne Park
+Royal Oak
+Paddington
+Edgware Road
+Baker Street
+Great Portland Street
+Euston Square
+King's Cross
+Farringdon
+Barbican
+Moorgate
+Liverpool Street
+Aldgate
+Tower Hill
+Aldgate East
+Whitechapel
+Line: Circle
+Tower Hill
+Aldgate
+Liverpool Street
+Moorgate
+Barbican
+Farringdon
+King's Cross
+Euston Square
+Great Portland Street
+Baker Street
+Edgware Road
+Paddington
+Bayswater
+Notting Hill Gate
+High Street Kensington
+Gloucester Road
+South Kensington
+Sloane Square
+Victoria
+St.James's Park
+Westminster
+Embankment
+Temple
+Blackfriars
+Mansion House
+Cannon Street
+Monument
+Line: District
+Upminster
+Upminster Bridge
+Hornchurch
+Elm Park
+Dagenham East
+Dagenham Heathway
+Becontree
+Upney
+Barking
+East Ham
+Upton Park
+Plaistow
+West Ham
+Bromley-by-Bow
+Bow Road
+Mile End
+Stepney Green
+Whitechapel
+Aldgate East
+Tower Hill
+Monument
+Cannon Street
+Mansion House
+Blackfriars
+Temple
+Embankment
+Westminster
+St. James's Park
+Victoria
+Sloane Square
+South Kensington
+Gloucester Road
+High Street Ken.
+Earl's Court
+West Brompton
+Fulham Broadway
+Parsons Green
+Putney Bridge
+East Putney
+Southfields
+Wimbledon Park
+Wimbledon
+West Kensington
+Barons Court
+Hammersmith
+Ravenscourt Park
+Stamford Brook
+Turnham Green
+Gunnersbury
+Kew Gardens
+Richmond
+Chiswick Park
+Acton Town
+Ealing Common
+Ealing Broadway
+Line: East London
+New Cross
+New Cross Gate
+Surrey Quays
+Rotherhithe
+Wapping
+Shadwell
+Whitechapel
+Shoreditch
+Line: Jubilee
+Stanmore
+Canons Park
+Queensbury
+Kingsbury
+Wembley Park
+Neasden
+Dollis Hill
+Willesden Green
+Kilburn
+West Hampstead
+Finchley Road
+Swiss Cottage
+St.John's Wood
+Baker Street
+Bond Street
+Green Park
+Westminister
+Waterloo
+Southwark
+London Bridge
+Bermondsy
+Canada Water
+Canary Wharf
+Canning Town
+West Ham
+Stratford
+Line: Metropolitan
+Aldgate
+Liverpool Street
+Moorgate
+Barbican
+Farringdon
+King's Cross
+Euston Square
+Great Portland Street
+Baker Street
+Finchley Road
+Wembley Park
+Preston Road
+Northwick Park
+Marylebone
+Harrow-on-the-hill
+West Harrow
+Rayners Lane
+Eastcote
+Ruislip Manor
+Ruislip
+Ickenham
+Hillingdon
+Uxbridge
+North Harrow
+Pinner
+Northwood Hills
+Northwood
+Moor Park
+Croxley
+Watford
+Rickmansworth
+Chorleywood
+Chalfont Latimer
+Chesham
+Amersham
+Line: Northen
+Morden
+South Wimbledon
+Colliers Wood
+Tooting Broadway
+Tooting Bec
+Balham
+Clapham South
+Clapham Common
+Clapham North
+Stockwell
+Oval
+Kennington
+Elephant Castle
+Borough
+London Bridge
+Bank
+Moorgate
+Old Street
+Angel
+King's Cross
+Waterloo
+Embankment
+Charing Cross
+Leicester Square
+Tottenham Court Road
+Goodge Street
+Warren Street
+Euston
+Mornington Crescent
+Camden town
+Kentish Town
+Tufnell Park
+Archway
+Highgate
+East Finchley
+Finchley Central
+Mill Hill East
+West Finchley
+Woodside Park
+Totteridge
+Hiigh Barnet
+Chalk Farm
+Belsize Park
+Hampstead
+Golders Green
+Brent Cross
+Hendon Central
+Colindale
+Burnt Oak
+Edgeware
+Line: Picadilly
+Cockfosters
+Oakwood
+Southgate
+Arnos Grove
+Bounds Green
+Wood Green
+Turnpike Lane
+Manor House
+Finsbury Park
+Arsenal
+Holloway Road
+Caledonian Road
+King's Cross
+Russell Square
+Holborn
+Covent Garden
+Leicester Square
+Piccadilly Circus
+Green Park
+Hyde Park Corner
+Knightsbridge
+South Kensington
+Gloucester Road
+Earl's Court
+Barons Court
+Hammersmith
+Acton Town
+South Ealing
+Northfields
+Boston Manor
+Osterley
+Hounslow East
+Hounslow Central
+Hounslow West
+Hatton Cross
+Heathrow Terminal 4
+Heathrow Terminals 1, 2, 3
+Ealing Common
+North Ealing
+Park Royal
+Alperton
+Sudbury Town
+Sudbury Hill
+South Harrow
+Rayners Lane
+Line: Victoria
+Brixton
+Stockwell
+Vauxhall
+Pimlico
+Victoria
+Green Park
+Oxford Circus
+Warren Street
+Euston
+King's Cross
+Highbury & Islington
+Finsbury Park
+Seven Sisters
+Tottenham Hale
+Blackhorse Road
+Walthamstow Central
+Line: Waterloo & City
+Waterloo
+Bank
