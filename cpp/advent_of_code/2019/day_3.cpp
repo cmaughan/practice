@@ -27,8 +27,6 @@ REGISTER_PROBLEM(AOC_2019_Day3)
     glm::ivec2 currentLocation(0, 0);
 
     int steps = 0;
-    int wire = 0;
-
     auto move = [&](int x, int y, int wire) {
         // Each step along the wire is a delta in x & y
         glm::ivec2 delta(0);
