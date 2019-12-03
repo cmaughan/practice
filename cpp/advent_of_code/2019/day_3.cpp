@@ -27,9 +27,9 @@ REGISTER_PROBLEM(AOC_2019_Day3)
     glm::ivec2 currentLocation(0, 0);
 
     int steps = 0;
-    int pass = 0;
+    int wire = 0;
 
-    auto move = [&](int x, int y, bool store) {
+    auto move = [&](int x, int y, int wire) {
         // Each step along the wire is a delta in x & y
         glm::ivec2 delta(0);
         if (x != 0)
@@ -46,15 +46,15 @@ REGISTER_PROBLEM(AOC_2019_Day3)
         {
             steps++;
             currentLocation += delta;
-            if (store)
+            if (wire == 0)
             {
-                // First pass, store the min steps if not stored yet
+                // First wire, store the min steps if not stored yet
                 if (locations.find(currentLocation) == locations.end())
                 {
                     locations[currentLocation] = steps;
                 }
             }
-            // Second pass, check for a collision and calculate min steps for each pass or min distance
+            // Second wire, check for a collision and calculate min steps for each wire or min distance
             else if (locations.find(currentLocation) != locations.end())
             {
                 minDistance = std::min(glm::abs(currentLocation).x + glm::abs(currentLocation).y, minDistance);
@@ -63,32 +63,30 @@ REGISTER_PROBLEM(AOC_2019_Day3)
         }
     };
 
-    for (auto& program : in)
+    for (int wire = 0; wire < 2; wire++)
     {
-        // Each pass, reset the location and the step count
+        // Each wire, reset the location and the step count
         currentLocation = glm::ivec2(0, 0);
         steps = 0;
-        for (auto& command : program)
+        for (auto& command : in[wire])
         {
             if (command[0] == 'L')
             {
-                move(-stoi(command.substr(1)), 0, pass == 0);
+                move(-stoi(command.substr(1)), 0, wire);
             }
             else if (command[0] == 'R')
             {
-                move(stoi(command.substr(1)), 0, pass == 0);
+                move(stoi(command.substr(1)), 0, wire);
             }
             else if (command[0] == 'U')
             {
-                move(0, -stoi(command.substr(1)), pass == 0);
+                move(0, -stoi(command.substr(1)), wire);
             }
             else if (command[0] == 'D')
             {
-                move(0, stoi(command.substr(1)), pass == 0);
+                move(0, stoi(command.substr(1)), wire);
             }
-
         }
-        pass = 1;
     }
     LOG(INFO) << "Part1 :" << minDistance;
     LOG(INFO) << "Part2 :" << minSteps;
