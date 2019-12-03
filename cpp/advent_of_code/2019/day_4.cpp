@@ -15,10 +15,10 @@
 using namespace std;
 using namespace MUtils;
 
-REGISTER_PROBLEM(AOC_2019_DayX)
+REGISTER_PROBLEM(AOC_2019_Day4)
 {
-    auto in = string_get_string_grid(file_read(PRACTICE_ROOT "/advent_of_code/2019/inputs/day_X.txt"));
-    LOG(INFO) << "Part 1: " << 1;
-    LOG(INFO) << "Part 2: " << 2;
+    auto in = string_get_string_grid(file_read(PRACTICE_ROOT "/advent_of_code/2019/inputs/day_4.txt"));
+
+    //LOG(INFO) << "Part2 :" << minSteps;
 }
 
