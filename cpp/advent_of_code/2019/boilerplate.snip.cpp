@@ -3,13 +3,12 @@
 #include "fileutils.h"
 #include "stringutils.h"
 #include "utils.h"
-
 #include <glm/glm.hpp>
 
 using namespace std;
 using namespace MUtils;
 
-REGISTER_PROBLEM(Problem1)
+REGISTER_PROBLEM(Problem12019)
 {
     /*std::istringstream iss(file_read(PRACTICE_ROOT "/advent_of_code/2018/inputs/day_5.txt"));
     std::vector<string> lines;

@@ -10,6 +10,8 @@
 #include "fileutils.h"
 #include "stringutils.h"
 
+#include "mutils/logger/logger.h"
+
 extern std::string g_CurrentProblem;
 
 inline std::string rosalind_input()
@@ -24,10 +26,11 @@ inline std::string rosalind_output()
 
 inline std::string ReadInput()
 {
+    using namespace MUtils;
     std::ifstream t(rosalind_input());
     if (!t.is_open())
     {
-        LOG(ERROR) << "File not found: " << rosalind_input() << std::endl;
+        LOG(ERROR) << "File not found: " << rosalind_input();
         return std::string();
     }
     return std::string((std::istreambuf_iterator<char>(t)),
@@ -41,10 +44,11 @@ inline std::shared_ptr<Fasta> ReadInputFasta()
 
 inline void WriteOutput(const std::string& out)
 {
+    using namespace MUtils;
     std::ofstream t(rosalind_output());
     if (!t.is_open())
     {
-        LOG(ERROR) << "Couldn't write: " << rosalind_output() << std::endl;
+        LOG(ERROR) << "Couldn't write: " << rosalind_output();
         return;
     }
 

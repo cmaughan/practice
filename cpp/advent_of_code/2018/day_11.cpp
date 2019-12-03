@@ -9,6 +9,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2018_Day11)
 {

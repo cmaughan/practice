@@ -10,6 +10,7 @@
 #include "stringutils.h"
 
 using namespace std;
+using namespace MUtils;
 
 glm::ivec2 UlamIndexToCoords(int n)
 {

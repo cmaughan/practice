@@ -7,7 +7,9 @@
 
 #include "ringitr.h"
 #include "utils/Allocator.h"
+
 using namespace std;
+using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2018_Day9)
 {

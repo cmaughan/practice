@@ -2,6 +2,8 @@
 #include "fileutils.h"
 #include "stringutils.h"
 
+using namespace MUtils;
+
 REGISTER_PROBLEM(AOC_2017_Day7)
 {
     // P7:1

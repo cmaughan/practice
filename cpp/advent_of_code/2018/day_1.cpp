@@ -7,7 +7,9 @@
 #include <numeric>
 
 #include "ringitr.h"
+
 using namespace std;
+using namespace MUtils;
 
 using IntItr = RingIterator<int, std::vector<int>>;
 

@@ -2,9 +2,12 @@
 
 #include <functional>
 #include <cassert>
+#include <map>
 
 #define NOMINMAX
-#include <easylogging/src/easylogging++.h>
+#include <mutils/logger/logger.h>
+
+#include "config_app.h"
 
 class ObjectFactory;
 class Object

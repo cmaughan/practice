@@ -1,8 +1,0 @@
-LIST(APPEND CPP_SOURCE
-    ${CMAKE_CURRENT_LIST_DIR}/easylogging/src/easylogging++.cc
-    )
-
-LIST(APPEND CPP_INCLUDE
-	${CMAKE_CURRENT_LIST_DIR}/tclap/include
-    ${CMAKE_CURRENT_LIST_DIR})
-
