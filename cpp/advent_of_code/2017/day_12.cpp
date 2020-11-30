@@ -1,8 +1,4 @@
 #include "common.h"
-#include "utils.h"
-#include "fileutils.h"
-#include "stringutils.h"
-#include "ringitr.h"
 
 #include <cassert>
 #include <limits>
@@ -19,7 +15,7 @@ REGISTER_PROBLEM(AOC_2017_Day12)
 {
     //8 <-> 432, 3
     std::map<int, std::set<int>> program_pipes;
-    auto lines = utils_get_string_grid(file_read(PRACTICE_ROOT "/advent_of_code/2017/inputs/p12input.txt"));
+    auto lines = string_get_string_grid(file_read(PRACTICE_ROOT "/advent_of_code/2017/inputs/p12input.txt"));
     for (auto l : lines)
     {
         auto id = std::stoi(l[0]);
@@ -50,7 +46,7 @@ REGISTER_PROBLEM(AOC_2017_Day12)
         }
     } while (inserted);
 
-    LOG(INFO) << "Part1 : " << program_pipes[0].size();
+    LOG(INFO, "Part1 : " << program_pipes[0].size());
 
     std::vector<std::set<int>> groups;
     for (auto p : program_pipes)
@@ -72,6 +68,6 @@ REGISTER_PROBLEM(AOC_2017_Day12)
             groups.push_back(p.second);
         }
     }
-    LOG(INFO) << "Part2 : " << groups.size();
+    LOG(INFO, "Part2 : " << groups.size());
 
 }

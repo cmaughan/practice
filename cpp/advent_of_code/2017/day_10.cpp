@@ -1,8 +1,8 @@
 #include "common.h"
-#include "utils.h"
-#include "fileutils.h"
-#include "stringutils.h"
-#include "ringitr.h"
+//#include "utils.h"
+//#include "fileutils.h"
+//#include "stringutils.h"
+//#include "ringitr.h"
 
 #include <cassert>
 #include <limits>
@@ -34,7 +34,7 @@ REGISTER_PROBLEM(AOC_2017_Day10)
     auto itr = ringItrInt(key);
     int skip_size = 0;
     hash(itr, inputVals, skip_size);
-    LOG(INFO) << "Part 1: " << key[0] * key[1];
+    LOG(INFO, "Part 1: " << key[0] * key[1]);
 
     // Second part of the problem uses a literal string as a binary input and appends magic numbers
     // Note: A different container type, but the hash function doesn't care!
@@ -53,7 +53,7 @@ REGISTER_PROBLEM(AOC_2017_Day10)
     // Splice the data into chunks of 16 and reduce by xor'ing the values
     std::ostringstream output;
     output << std::setw(2) << std::setfill('0') << std::hex;
-    utils_splice(key, key.begin(), 16, [&output](auto itr1, auto itr2)
+    container_splice(key, key.begin(), 16, [&output](auto itr1, auto itr2)
     {
         output << std::reduce(itr1, itr2, 0, [](auto current, auto val)
         {
@@ -61,5 +61,5 @@ REGISTER_PROBLEM(AOC_2017_Day10)
         });
     });
 
-    LOG(INFO) << "Part 2: " << output.str();
+    LOG(INFO, "Part 2: " << output.str());
 }

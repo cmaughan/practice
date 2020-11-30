@@ -1,6 +1,4 @@
 #include "common.h"
-#include "fileutils.h"
-#include "stringutils.h"
 
 using namespace MUtils;
 
@@ -8,7 +6,9 @@ REGISTER_PROBLEM(AOC_2017_Day7)
 {
     // P7:1
     auto p7input = file_read(PRACTICE_ROOT "/advent_of_code/2017/inputs/p7input.txt");
-    std::vector<std::string> lines = string_split_lines(p7input);
+   
+    std::vector<std::string> lines;
+    string_split_lines(p7input, lines);
 
     // A tower disc
     struct disc
@@ -91,7 +91,7 @@ REGISTER_PROBLEM(AOC_2017_Day7)
 
     // Get the root
     auto pRoot = std::find_if(discs.begin(), discs.end(), [](const std::pair<std::string, std::shared_ptr<disc>>& p) { return p.second->pParent == nullptr; })->second;
-    LOG(INFO) << "P7,1: " << pRoot->name;
+    LOG(INFO, "P7,1: " << pRoot->name);
 
     // Build the weights, find the unbalanced disc
     pRoot->UpdateWeights();
@@ -99,5 +99,5 @@ REGISTER_PROBLEM(AOC_2017_Day7)
     auto itrSibling = std::find_if(pRet->pParent->children.begin(), pRet->pParent->children.end(), [pRet](disc* pChild) { return pChild != pRet; });
 
     // Balance result is the discs weight difference from the sibling
-    LOG(INFO) << "P7,2: " << pRet->weight - (pRet->childWeights - (*itrSibling)->childWeights);
+    LOG(INFO, "P7,2: " << pRet->weight - (pRet->childWeights - (*itrSibling)->childWeights));
 }

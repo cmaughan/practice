@@ -4,8 +4,11 @@
 #include <cassert>
 #include <map>
 
-#define NOMINMAX
 #include <mutils/logger/logger.h>
+#include <mutils/algorithm/ringiterator.h>
+#include <mutils/file/file.h>
+#include <mutils/algorithm/container_utils.h>
+#include <mutils/string/string_utils.h>
 
 #include "config_app.h"
 

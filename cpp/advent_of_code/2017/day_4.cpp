@@ -1,6 +1,4 @@
 #include "common.h"
-#include "utils.h"
-#include "fileutils.h"
 
 #include <string>
 #include <set>
@@ -16,7 +14,7 @@ REGISTER_PROBLEM(AOC_2017_Day4)
     assert(t.is_open());
     std::stringstream buffer;
     buffer << t.rdbuf();
-    auto p4lines = utils_get_string_grid(buffer.str());
+    auto p4lines = string_get_string_grid(buffer.str());
 
     auto FindDuplicates = [p4lines](bool anagrams = false)
     {
@@ -39,6 +37,6 @@ REGISTER_PROBLEM(AOC_2017_Day4)
         }
         return int(p4lines.size()) - badCount;
     };
-    LOG(INFO) << "P4,1" << FindDuplicates();
-    LOG(INFO) << "P4,2" << FindDuplicates(true);
+    LOG(INFO, "P4,1" << FindDuplicates());
+    LOG(INFO, "P4,2" << FindDuplicates(true));
 }

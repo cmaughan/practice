@@ -1,8 +1,4 @@
 #include "common.h"
-#include "utils.h"
-#include "fileutils.h"
-#include "stringutils.h"
-#include "ringitr.h"
 
 #include <cassert>
 #include <limits>
@@ -16,7 +12,7 @@ using namespace MUtils;
 
 REGISTER_PROBLEM(AOC_2017_Day11)
 {
-    auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2017/inputs/p11input.txt"));
+    auto input = string_split(file_read(PRACTICE_ROOT "/advent_of_code/2017/inputs/p11input.txt"), ",");
     
     // http://3dmdesign.com/development/hexmap-coordinates-the-easy-way
     // Coordinate system; n/s is +/-y
@@ -45,6 +41,6 @@ REGISTER_PROBLEM(AOC_2017_Day11)
     int dist = std::max(0, std::abs(coord.x));
     dist = std::max(dist, std::abs(coord.y));
     dist = std::max(dist, std::abs(coord.x - coord.y));
-    LOG(INFO) << "Part 1: " << dist;
-    LOG(INFO) << "Part 2: " << max_dist;
+    LOG(INFO, "Part 1: " << dist);
+    LOG(INFO, "Part 2: " << max_dist);
 }

@@ -1,6 +1,4 @@
 #include "common.h"
-#include "utils.h"
-#include "fileutils.h"
 
 #include <cassert>
 #include <limits>
@@ -16,7 +14,7 @@ REGISTER_PROBLEM(AOC_2017_Day8)
     assert(p8in.is_open());
     std::stringstream p8buffer;
     p8buffer << p8in.rdbuf();
-    auto p8grid = utils_get_string_grid(p8buffer.str());
+    auto p8grid = string_get_string_grid(p8buffer.str());
     enum inputEntry { Reg1, Op, Val1, If, Reg2, Cmp, Val2 };
     struct regVal { int v = 0; void inc(int val) { v += val; } };
     enum class OpType { LESS, GREATER, LEQUAL, GEQUAL, NOTEQUAL, EQUAL };

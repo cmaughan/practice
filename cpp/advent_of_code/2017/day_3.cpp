@@ -1,13 +1,7 @@
 #include "common.h"
 
-#include "utils.h"
-#include "ringitr.h"
-
-#define GLM_ENABLE_EXPERIMENTAL
 #include "glm/glm.hpp"
 #include <glm/gtx/hash.hpp>
-
-#include "stringutils.h"
 
 using namespace std;
 using namespace MUtils;
@@ -45,7 +39,7 @@ REGISTER_PROBLEM(AOC_2017_Day3)
 {
     // P3, 1: Spiral Memory
     auto coord = UlamIndexToCoords(368078);
-    LOG(INFO) << "P3,1" << std::abs(coord.x) + std::abs(coord.y);
+    LOG(INFO, "P3,1" << std::abs(coord.x) + std::abs(coord.y));
 
     // P3, 2: Walk and accumulate surrounds 
     std::unordered_map<glm::ivec2, int> spiralVals{ { glm::ivec2(0, 0), 1 } };
@@ -60,5 +54,5 @@ REGISTER_PROBLEM(AOC_2017_Day3)
             spiralVals[coord] += (itr != spiralVals.end() ? itr->second : 0);
         }
     } while (spiralVals[coord] < 368078);
-    LOG(INFO) << "P3,2" << spiralVals[coord];
+    LOG(INFO, "P3,2" << spiralVals[coord]);
 }

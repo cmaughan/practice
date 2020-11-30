@@ -1,9 +1,6 @@
 #include "common.h"
-#include "fileutils.h"
-#include "utils.h"
 
 #include <set>
-#include "ringitr.h"
 
 using namespace MUtils;
 
@@ -11,7 +8,7 @@ REGISTER_PROBLEM(AOC_2017_Day6)
 {
     using ringItrInt = RingIterator<int, std::vector<int>>;
 
-    auto banks = utils_get_integers("10	3	15	10	5	15	5	15	9	2	5	8	5	2	3	6");
+    auto banks = string_get_integers("10	3	15	10	5	15	5	15	9	2	5	8	5	2	3	6");
     auto banks2 = banks;
     auto FindLoop = [&banks](bool loopSize = false)
     {
@@ -34,8 +31,8 @@ REGISTER_PROBLEM(AOC_2017_Day6)
             matches.insert(banks);
         }
     };
-    LOG(INFO) << "Part 1: " << FindLoop(false) + 1;
+    LOG(INFO, "Part 1: " << FindLoop(false) + 1);
 
     banks = banks2;
-    LOG(INFO) << "Part 2: " << FindLoop(true);
+    LOG(INFO, "Part 2: " << FindLoop(true));
 }
