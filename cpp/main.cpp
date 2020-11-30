@@ -2,6 +2,7 @@
 #include <clipp.h>
 
 #include <map>
+#include <fmt/format.h>
 
 #include <mutils/ui/sdl_imgui_starter.h>
 #include <mutils/file/runtree.h>
@@ -14,16 +15,12 @@ using namespace clipp;
 
 std::string g_CurrentProblem;
 
+Object* g_pObject = nullptr;
 class App : public IAppStarterClient
 {
 public:
     App()
     {
-        AllocConsole();
-#ifdef WIN32
-        FILE* pStreamOut = nullptr;
-        freopen_s(&pStreamOut, "CONOUT$", "w", stdout);
-#endif
 
         m_settings.flags |= AppStarterFlags::DockingEnable;
         m_settings.startSize = NVec2i(1680, 1000);
@@ -71,6 +68,7 @@ public:
     virtual void Destroy() override
     {
         MUtils::Profiler::Finish();
+        delete g_pObject;
     }
 
     virtual void Draw(const NVec2i& displaySize) override
@@ -141,6 +139,11 @@ public:
             ImGui::EndMenuBar();
         }
 
+        if (g_pObject)
+        {
+            g_pObject->DrawGUI();
+        }
+
         ImGui::End();
     }
 
@@ -168,13 +171,9 @@ private:
 
 App theApp;
 
-int main(int args, char** ppArgs)
-{
-}
-
 int main(int argc, char** argv)
 {
-    
+
     MUtils::Profiler::Init();
 
     // Parse the command line
@@ -182,45 +181,29 @@ int main(int argc, char** argv)
     std::string data;
     auto cli = group(
         value("problem", problem)
-        );
+    );
 
-    if (parse(argc, argv, cli))
+    if (parse(argc, argv, cli) && !problem.empty())
     {
-        if (!problem.empty())
+        ObjectFactory* pFactory = nullptr;
+        for (auto& p : Object::GetFactories())
         {
-            ObjectFactory* pFactory = nullptr;
-            for (auto& p : Object::GetFactories())
+            if (p.first == problem)
             {
-                if (p.first == problem)
-                {
-                    pFactory = p.second;
-                }
-            }
-
-            if (pFactory == nullptr)
-            {
-                LOG(ERROR, problem << " problem not found!");
-                return 1;
-            }
-
-            LOG(INFO, "\nProblem: " << problem);
-            g_CurrentProblem = problem;
-            auto pObj = pFactory->create();
-            pObj->Run();
-            delete pObj;
-
-        }
-        else
-        {
-            for (auto& p : Object::GetFactories())
-            {
-                LOG(INFO, "\nProblem: " << p.first);
-                g_CurrentProblem = p.first;
-                auto pObj = p.second->create();
-                pObj->Run();
-                delete pObj;
+                pFactory = p.second;
             }
         }
+
+        if (pFactory == nullptr)
+        {
+            LOG(ERROR, problem << " problem not found!");
+            return 1;
+        }
+
+        LOG(INFO, "\nProblem: " << problem);
+        g_CurrentProblem = problem;
+        g_pObject = pFactory->create();
+        g_pObject->Run();
     }
     else
     {

@@ -52,11 +52,12 @@ INCLUDE_DIRECTORIES(
     ./
     ) 
 
-ADD_EXECUTABLE (${PROJECT_NAME}_Cpp ${CPP_SOURCE} main.cpp common.h)
+ADD_EXECUTABLE (${PROJECT_NAME}_Cpp WIN32 ${CPP_SOURCE} ${CMAKE_CURRENT_LIST_DIR}/dpiawarescaling.manifest main.cpp common.h)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}_Cpp
     opengl32 
     SDL2::SDL2
+    SDL2::SDL2main
     MUtils::MUtils)
 
 SOURCE_GROUP (utils REGULAR_EXPRESSION "utils/.*")
