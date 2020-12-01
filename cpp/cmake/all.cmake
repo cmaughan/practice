@@ -60,8 +60,8 @@ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Windows")
     ENDIF()
     
     # Makes compile slow machine
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MP6")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP6")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /std:c++latest /MP6")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++latest /MP6")
     
     list(APPEND PLATFORM_LINKLIBS
         opengl32.lib

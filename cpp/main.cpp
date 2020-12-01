@@ -8,6 +8,7 @@
 #include <mutils/file/runtree.h>
 #include <mutils/time/profiler.h>
 
+#include <implot.h>
 using namespace std;
 using namespace MUtils;
 using namespace MUtils::Profiler;
@@ -51,6 +52,7 @@ public:
 
     virtual void InitBeforeDraw() override
     {
+        ImPlot::CreateContext();
     }
 
     virtual void InitDuringDraw() override
@@ -67,6 +69,7 @@ public:
 
     virtual void Destroy() override
     {
+        ImPlot::DestroyContext();
         MUtils::Profiler::Finish();
         delete g_pObject;
     }
@@ -139,9 +142,11 @@ public:
             ImGui::EndMenuBar();
         }
 
+        bool open = true;
+        Profiler::ShowProfile(&open);
         if (g_pObject)
         {
-            g_pObject->DrawGUI();
+            g_pObject->Run();
         }
 
         ImGui::End();
@@ -203,7 +208,6 @@ int main(int argc, char** argv)
         LOG(INFO, "\nProblem: " << problem);
         g_CurrentProblem = problem;
         g_pObject = pFactory->create();
-        g_pObject->Run();
     }
     else
     {

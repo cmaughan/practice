@@ -29,6 +29,7 @@ find_package(freetype CONFIG REQUIRED)
 find_package(unofficial-concurrentqueue REQUIRED)
 find_package(tinyfiledialogs REQUIRED)
 find_package(mutils REQUIRED)
+find_package(implot REQUIRED)
 
 MESSAGE(STATUS " CMakeLists: Practice")
 
@@ -58,6 +59,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}_Cpp
     opengl32 
     SDL2::SDL2
     SDL2::SDL2main
+    implot::implot 
     MUtils::MUtils)
 
 SOURCE_GROUP (utils REGULAR_EXPRESSION "utils/.*")
