@@ -144,10 +144,16 @@ public:
 
         bool open = true;
         Profiler::ShowProfile(&open);
-        if (g_pObject)
+
+        static int warmUp = 0;
+        if (warmUp > 0)
         {
-            g_pObject->Run();
+            if (g_pObject)
+            {
+                g_pObject->Run();
+            }
         }
+        warmUp++;
 
         ImGui::End();
     }

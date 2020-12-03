@@ -12,40 +12,55 @@
 using namespace std;
 using namespace MUtils;
 
-std::string part1;
-std::string part2;
-std::vector<int> input;
+namespace
+{
+    std::string part1;
+    std::string part2;
+    std::vector<int> input;
+    std::vector<int> error;
+    std::vector<int> xAxis;
+    float minErr = std::numeric_limits<float>::max();
+    float maxErr = std::numeric_limits<float>::min();
 
-std::vector<int> error;
-std::vector<int> xAxis;
-float minErr = std::numeric_limits<float>::max();
-float maxErr = std::numeric_limits<float>::min();
+    class Once
+    {
+    public:
+        Once(std::function<void()> fn)
+        {
+            fn();
+        }
+    };
+}
 
-
+#define BEGIN_ONCE static Once once([]()
+#define END_ONCE ); 
 REGISTER_PROBLEM(AOC_2020_Day1)
 {
-    PROFILE_SCOPE(Day1);
-
-    static bool firstRun = true;
-    if (firstRun)
+    BEGIN_ONCE
     {
-        firstRun = false;
-        int count = 0;
+        PROFILE_SCOPE(Solution)
+
         input = string_get_integers(file_read(PRACTICE_ROOT "/advent_of_code/2020/inputs/day_1.txt"));
+
+        error.resize(input.size() * input.size());
+        xAxis.resize(input.size() * input.size());
+        std::iota(xAxis.begin(), xAxis.end(), 0);
+
+        int count = 0;
         container_test_pairs(input, [&](auto a, auto b)
         {
-            xAxis.push_back(count++);
-
             auto dev = std::abs(2020 - (a + b));
             minErr = std::min(minErr, float(dev));
             maxErr = std::max(maxErr, float(dev));
-            error.push_back(dev);
+            error[count++] = dev;
+
             if ((a + b) == 2020) {
                 part1 = std::to_string(a * b);
                 return false;
             }
             return true;
         });
+        error.resize(count);
 
         container_test_triples(input, [&](auto a, auto b, auto c)
         {
@@ -55,30 +70,32 @@ REGISTER_PROBLEM(AOC_2020_Day1)
             }
             return true;
         });
+    } END_ONCE;
 
-    }
 
-    static int resetCount = 2;
-   
-    if (resetCount < 1)
     {
+        PROFILE_SCOPE(ResultPlot);
         if (ImGui::Begin("Results"))
         {
-            ImPlot::SetNextPlotLimits(0.0f, xAxis[xAxis.size() - 1], minErr, maxErr);
-            if (ImPlot::BeginPlot("Deviation",
-                "Index",
-                "Value", ImVec2(-1, 1024)))
+            if (xAxis.size() != 0)
             {
-                ImPlot::PlotScatter("Error", xAxis.data(), error.data(), int(xAxis.size()));
+                ImPlot::SetNextPlotLimits(0.0f, xAxis[xAxis.size() - 1], minErr, maxErr);
+                if (ImPlot::BeginPlot("Deviation",
+                    "Index",
+                    "Value", ImVec2(-1, 1024)))
+                {
+                    ImPlot::PlotScatter("Error", xAxis.data(), error.data(), int(error.size()));
 
-                ImPlot::EndPlot();
+                    ImPlot::EndPlot();
+                }
+                ImGui::Text(fmt::format("Part1: {}", part1).c_str());
+                ImGui::Text(fmt::format("Part2: {}", part2).c_str());
             }
-            ImGui::Text(fmt::format("Part1: {}", part1).c_str());
-            ImGui::Text(fmt::format("Part2: {}", part2).c_str());
         }
         ImGui::End();
     }
 
+    static int resetCount = 2;
     if (resetCount == 0)
     {
         Profiler::SetPaused(true);
