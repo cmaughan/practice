@@ -13,6 +13,7 @@
 using namespace std;
 using namespace MUtils;
 
+/*
 namespace
 {
     std::string part1;
@@ -104,5 +105,5 @@ REGISTER_PROBLEM(AOC_2020_Day2)
     }
     resetCount--;
 }
-
+*/
 

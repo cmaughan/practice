@@ -177,6 +177,7 @@ uint32_t Part2()
 
 }
 
+/*
 REGISTER_PROBLEM(AOC_2020_Day12)
 {
     PROFILE_SCOPE(Solution);
@@ -199,5 +200,6 @@ REGISTER_PROBLEM(AOC_2020_Day12)
     }
     resetCount--;
 }
+*/
 
 

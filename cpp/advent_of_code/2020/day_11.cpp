@@ -186,7 +186,7 @@ uint32_t DoIt(bool part1, bool& done)
 
 }
 
-
+/*
 REGISTER_PROBLEM(AOC_2020_Day11)
 {
     PROFILE_SCOPE(Solution);
@@ -262,5 +262,6 @@ REGISTER_PROBLEM(AOC_2020_Day11)
     }
     resetCount--;
 }
+*/
 
 

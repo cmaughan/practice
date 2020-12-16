@@ -27,7 +27,8 @@ public:
     {
         Object::GetFactories()[name] = factory;
     }
-    virtual void Run() = 0;
+    virtual void RunOnce() {};
+    virtual void Run() {};
     virtual void DrawGUI() {};
 };
 
@@ -38,7 +39,6 @@ public:
 };
 
 #define REGISTER_PROBLEM(klass) \
-    class klass : public Object { virtual void Run() override; }; \
     class klass##Factory : public ObjectFactory { \
     public: \
         klass##Factory() \
@@ -49,20 +49,5 @@ public:
             return new klass(); \
         } \
     }; \
-    static klass##Factory global_##klass##Factory; \
-void klass::Run()
-
-#define REGISTER_PROBLEM_GUI(klass) \
-    class klass : public Object { virtual void Run() override; virtual void DrawGUI() override;}; \
-    class klass##Factory : public ObjectFactory { \
-    public: \
-        klass##Factory() \
-        { \
-            Object::registerType(#klass, this); \
-        } \
-        virtual Object *create() { \
-            return new klass(); \
-        } \
-    }; \
-    static klass##Factory global_##klass##Factory; \
+    static klass##Factory global_##klass##Factory;
 

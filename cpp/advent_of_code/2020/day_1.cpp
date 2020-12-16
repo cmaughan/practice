@@ -21,26 +21,15 @@ namespace
     std::vector<int> xAxis;
     float minErr = std::numeric_limits<float>::max();
     float maxErr = std::numeric_limits<float>::min();
-
-    class Once
-    {
-    public:
-        Once(std::function<void()> fn)
-        {
-            fn();
-        }
-    };
 }
 
-#define BEGIN_ONCE static Once once([]()
-#define END_ONCE ); 
-REGISTER_PROBLEM(AOC_2020_Day1)
+class AOC_2020_Day1 : public Object
 {
-    BEGIN_ONCE
+    virtual void RunOnce() override
     {
         PROFILE_SCOPE(Solution)
 
-        input = string_get_integers(file_read(PRACTICE_ROOT "/advent_of_code/2020/inputs/day_1.txt"));
+            input = string_get_integers(file_read(PRACTICE_ROOT "/advent_of_code/2020/inputs/day_1.txt"));
 
         error.resize(input.size() * input.size());
         xAxis.resize(input.size() * input.size());
@@ -70,9 +59,9 @@ REGISTER_PROBLEM(AOC_2020_Day1)
             }
             return true;
         });
-    } END_ONCE;
+    }
 
-
+    virtual void DrawGUI() override
     {
         PROFILE_SCOPE(ResultPlot);
         if (ImGui::Begin("Results"))
@@ -94,13 +83,7 @@ REGISTER_PROBLEM(AOC_2020_Day1)
         }
         ImGui::End();
     }
+};
 
-    static int resetCount = 2;
-    if (resetCount == 0)
-    {
-        Profiler::SetPaused(true);
-    }
-    resetCount--;
-}
-
+REGISTER_PROBLEM(AOC_2020_Day1);
 

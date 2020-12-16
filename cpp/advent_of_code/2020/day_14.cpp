@@ -180,6 +180,7 @@ mem[26] = 1)";
 
 };
 
+/*
 REGISTER_PROBLEM(AOC_2020_Day14)
 {
     PROFILE_SCOPE(Solution);
@@ -201,5 +202,6 @@ REGISTER_PROBLEM(AOC_2020_Day14)
     }
     resetstartTime--;
 }
+*/
 
 

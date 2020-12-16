@@ -150,7 +150,18 @@ public:
         {
             if (g_pObject)
             {
+                if (warmUp == 1)
+                {
+                    g_pObject->RunOnce();
+                }
                 g_pObject->Run();
+                g_pObject->DrawGUI();
+
+
+                if (warmUp == 2)
+                {
+                    Profiler::SetPaused(true);
+                }
             }
         }
         warmUp++;

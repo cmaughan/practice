@@ -38,7 +38,8 @@ namespace
 #define BEGIN_ONCE static Once once([]()
 #define END_ONCE ); 
 
-REGISTER_PROBLEM(AOC_2020_Day6)
+
+/*REGISTER_PROBLEM(AOC_2020_Day6)
 {
     PROFILE_SCOPE(Solution);
 
@@ -87,5 +88,6 @@ REGISTER_PROBLEM(AOC_2020_Day6)
     }
     resetCount--;
 }
+*/
 
 

@@ -32,6 +32,7 @@ namespace
 #define BEGIN_ONCE static Once once([]()
 #define END_ONCE ); 
 
+/*
 REGISTER_PROBLEM(AOC_2020_Day3)
 {
     BEGIN_ONCE
@@ -84,5 +85,6 @@ REGISTER_PROBLEM(AOC_2020_Day3)
     }
     resetCount--;
 }
+*/
 
 

@@ -139,6 +139,7 @@ uint64_t Part2()
     return 0;
 }
 
+/*
 REGISTER_PROBLEM(AOC_2020_Day13)
 {
     PROFILE_SCOPE(Solution);
@@ -160,5 +161,6 @@ REGISTER_PROBLEM(AOC_2020_Day13)
     }
     resetstartTime--;
 }
+*/
 
 
