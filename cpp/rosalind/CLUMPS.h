@@ -1,0 +1,2 @@
+#pragma once
+DECLARE_PROBLEM(CLUMPS)
