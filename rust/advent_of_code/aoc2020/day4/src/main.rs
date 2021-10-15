@@ -1,11 +1,9 @@
 use std::collections::HashSet;
-use itertools::Itertools;
 
 const FILE : &'static str = include_str!("../input.txt");
 const REQ_FIELDS: [&'static str; 7] = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
 
 fn part1(data : &str) -> usize {
-    /*
     data
         .split("\n\n")
         .map(|fields| fields
@@ -14,10 +12,6 @@ fn part1(data : &str) -> usize {
             .collect::<HashSet<_>>())
         .filter(|p| REQ_FIELDS.iter().all(|req| p.contains(req)))
         .count()
-     */
-    let v = data.split("\n\n").map(|f| f.split_ascii_whitespace()).next().unwrap();
-    println!("{:?}", v );
-    5
 }
 
 fn part2(_data : &str) -> usize {
