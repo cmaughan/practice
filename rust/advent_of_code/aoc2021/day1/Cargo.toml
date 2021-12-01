@@ -7,6 +7,7 @@ edition = "2018"
 
 [dependencies]
 cargo-edit = "0.8.0"
+itermore = "0.1.0"
 itertools = "0.10.1"
 lazy-regex = "2.2.1"
 lazy_static = "1.4.0"
