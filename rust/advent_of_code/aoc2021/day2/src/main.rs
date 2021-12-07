@@ -17,7 +17,7 @@ fn part1() -> i32 {
 }
 
 fn part2() -> i64 {
-    include_str!("../input.txt")
+    let ret = include_str!("../input.txt")
         .split_ascii_whitespace()
         .tuples()
         .fold((0, 0, 0), |acc, (d, v)| {
@@ -29,7 +29,8 @@ fn part2() -> i64 {
                 "up" => (acc.0 - inc, acc.1, acc.2),
                 _ => panic!("Unexpected")
             }
-        }).summary_by_product()
+        });
+    return ret.1 * ret.2;
 }
 
 pub fn main() {
