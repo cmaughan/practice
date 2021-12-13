@@ -223,7 +223,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "day7"
+name = "day9"
 version = "0.1.0"
 dependencies = [
  "cargo-edit",
