@@ -1,3 +1,4 @@
+/*
 use nannou::prelude::*;
 use std::cell::RefCell;
 use std::sync::Arc;
@@ -38,3 +39,4 @@ fn view(app: &App, frame: Frame) {
         .color(c);
     draw.to_frame(app, &frame).unwrap();
 }
+*/

@@ -71,7 +71,7 @@ pub fn main() {
     println!("Part1: {}", part1(& mut data.clone()));
     println!("Part2: {}", part2(& mut data.clone()));
 
-    renderer::render(&mut data.clone());
+    //renderer::render(&mut data.clone());
 }
 
 #[cfg(test)]
