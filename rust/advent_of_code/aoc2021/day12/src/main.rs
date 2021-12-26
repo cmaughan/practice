@@ -1,39 +1,30 @@
 use std::collections::HashMap;
 
-pub fn seek<'a>(caves: &HashMap<&str, Vec<&'a str>>, path : &mut Vec<&'a str>, small_count: i32)
+pub fn seek<'a>(caves: &HashMap<&str, Vec<&'a str>>, path : &mut Vec<&'a str>, entry: &str,
+small_count: i32)
     -> usize {
-    let mut tot = 0;
-    for &s in caves.get(*path.last().unwrap()).unwrap().iter() {
-        let mut count = 0;
+    caves[entry].iter()
+        .map(|&s| {
         if s == "end" {
-            tot += 1;
-            continue;
+            return 1;
         }
-        if s == "start" {
-            continue;
-        }
+
+        let mut count = 0;
         if s.to_lowercase() == s {
+            if s == "start" {
+                return 0;
+            }
             count = path.iter().filter(|&&comp| s == comp).count() as i32;
             if count > small_count {
-                continue;
+                return 0;
             }
         };
 
         path.push(s);
-        tot += seek(&caves, path, small_count - count);
+        let ret = seek(&caves, path, s, small_count - count);
         path.pop();
-    }
-    tot
-}
-pub fn start<'a>(caves : &HashMap<&str, Vec<&'a str>>, small_count: i32) -> usize {
-    let mut tot = 0;
-    for s in caves["start"].iter() {
-        let mut v = Vec::new();
-        v.push(*s);
-        tot += seek(&caves, & mut v, small_count);
-        v.pop();
-    }
-    tot
+        ret
+    }).sum()
 }
 
 pub fn main() {
@@ -45,14 +36,13 @@ pub fn main() {
             acc
         });
 
-    let p1 = start(&d, 0);
+    let p1 = seek(&d, &mut Vec::new(), "start", 0);
     assert!(p1 == 3497);
     println!("Part1: {}", p1);
 
-    let p2 = start(&d, 1);
+    let p2 = seek(&d, &mut Vec::new(), "start", 1);
     assert!(p2 == 93686);
     println!("Part2: {}", p2);
-
 }
 
 #[cfg(test)]
