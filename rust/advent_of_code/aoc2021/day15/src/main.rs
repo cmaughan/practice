@@ -44,7 +44,7 @@ fn part1(grid : &Array2<usize>) -> usize {
             let next = State { cost: cost + cave, position: (new_x as usize, new_y as usize) };
             if next.cost < distances[next.position] {
                 q.push(next);
-                *distances.get_mut(next.position).unwrap() = next.cost;
+                distances[next.position] = next.cost;
             }
         }
     }
@@ -55,13 +55,23 @@ pub fn main() {
     let input = include_str!("../input.txt");
     let height = input.lines().count();
     let width = input.lines().next().unwrap().len();
-    let a = Array::from_shape_vec((width, height),
-                                  input.bytes()
-                                      .filter(|&c| c != b'\n')
-                                      .map(|v| (v - b'0') as usize)
-                                      .collect_vec()).unwrap();
+
+    let vals = input.bytes()
+        .filter(|&c| c != b'\n')
+        .map(|v| (v - b'0') as usize)
+        .collect_vec();
+
+    let a = Array::from_shape_fn((width, height), |(x, y)| vals[y * width + x]);
+
+    // Duplicate and increment
+    let b = Array::from_shape_fn((width * 5, height * 5), |(x, y)| {
+        let (orig_x, orig_y) = (x % width, y % height);
+        let (x_tile, y_tile) = (x / width, y / height);
+        ((vals[orig_y * width + orig_x] + x_tile + y_tile - 1) % 9) + 1
+    });
+
     println!("Part1: {}", part1(&a));
-    println!("Part2: {}", 2);
+    println!("Part2: {}", part1(&b));
 }
 
 #[cfg(test)]
