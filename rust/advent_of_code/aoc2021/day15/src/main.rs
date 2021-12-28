@@ -1,30 +1,12 @@
-use std::cmp::Ordering;
-use std::collections::BinaryHeap;
-use itertools::Itertools;
-use ndarray::Array;
-use ndarray::Array2;
-
-#[derive(Copy, Clone, Eq, PartialEq)]
-struct State {
-    cost: usize,
-    position: (usize, usize)
-}
-
-impl Ord for State {
-    fn cmp(&self, other: &Self) -> Ordering {
-        other.cost.cmp(&self.cost).then_with(|| self.position.cmp(&other.position))
-    }
-}
-impl PartialOrd for State {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> { Some(self.cmp(other)) }
-}
+use std::{cmp::Reverse, collections::BinaryHeap};
+use ndarray::{Array, Array2};
 
 fn part1(grid : &Array2<usize>) -> usize {
     let mut q = BinaryHeap::new();
     let mut distances : Array2<usize> = Array::from_elem(grid.raw_dim(), usize::MAX);
-    q.push(State {cost: 0, position: (0, 0) });
+    q.push((Reverse(0), (0, 0)));
     let goal = (grid.nrows() - 1, grid.ncols() - 1);
-    while let Some(State { cost, position }) = q.pop() {
+    while let Some((Reverse(cost), position)) = q.pop() {
         if position == goal {
             return cost;
         }
@@ -40,11 +22,11 @@ fn part1(grid : &Array2<usize>) -> usize {
             if new_y < 0 || new_y >= grid.nrows() as i32 {
                 continue;
             }
-            let cave = grid[(new_x as usize, new_y as usize)];
-            let next = State { cost: cost + cave, position: (new_x as usize, new_y as usize) };
-            if next.cost < distances[next.position] {
-                q.push(next);
-                distances[next.position] = next.cost;
+            let new_pos = (new_x as usize, new_y as usize);
+            let cave = grid[new_pos];
+            if (cost + cave) < distances[new_pos] {
+                q.push((Reverse(cost + cave), new_pos));
+                distances[new_pos] = cost + cave;
             }
         }
     }
@@ -59,7 +41,7 @@ pub fn main() {
     let vals = input.bytes()
         .filter(|&c| c != b'\n')
         .map(|v| (v - b'0') as usize)
-        .collect_vec();
+        .collect::<Vec<usize>>();
 
     let a = Array::from_shape_fn((width, height), |(x, y)| vals[y * width + x]);
 
