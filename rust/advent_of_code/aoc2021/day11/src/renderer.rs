@@ -1,3 +1,4 @@
+/*
 use nannou::prelude::*;
 use std::sync::{Mutex};
 use lazy_static::lazy_static;
@@ -70,3 +71,4 @@ fn view(app: &App, _model: &Model, frame: Frame) {
     draw.to_frame(app, &frame).unwrap();
     sleep(Duration::new(0, 10000000));
 }
+*/
