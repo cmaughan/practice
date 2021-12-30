@@ -6,6 +6,6 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-aoc-main = { path = "../aoc_runner" }
+aoc-main = { path = "../aoc_runner", features=["bench"] }
 itermore = "0.2.0"
 itertools = "0.10.3"
