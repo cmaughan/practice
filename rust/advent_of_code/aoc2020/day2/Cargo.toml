@@ -10,7 +10,7 @@ cargo-edit = "0.8.0"
 itertools = "0.10.1"
 lazy-regex = "2.2.1"
 lazy_static = "1.4.0"
-regex = "1.5.4"
+regex = "1.5.5"
 
 [lib]
 path = "src/main.rs"
