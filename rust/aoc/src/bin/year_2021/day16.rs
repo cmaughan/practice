@@ -1,12 +1,9 @@
-use itermore::Itermore;
-use itertools::Itertools;
-
-pub fn part1(data: &Vec<u8>) -> usize {
-    println!("{:#?}", data);
+pub fn part1(_data: &Vec<u8>) -> usize {
+    //println!("{:#?}", data);
     0
 }
 
-pub fn part2(data: &Vec<u8>) -> usize {
+pub fn part2(_data: &Vec<u8>) -> usize {
     0
 }
 

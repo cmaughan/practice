@@ -3,5 +3,5 @@ pub fn add_one() -> usize {
 }
 
 pub struct BitWalker<'a> {
-    bits: &'a [u8]
+    _bits: &'a [u8]
 }

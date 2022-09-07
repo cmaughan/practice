@@ -1,4 +1,5 @@
 #![feature(hash_drain_filter)]
+#![feature(iter_array_chunks)]
 
 mod year_2021;
 use year_2021::{*};
