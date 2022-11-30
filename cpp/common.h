@@ -1,5 +1,6 @@
 #pragma once
 
+#undef IMGUI_ENABLE_FREETYPE
 #include <functional>
 #include <cassert>
 #include <map>

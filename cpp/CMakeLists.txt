@@ -11,7 +11,7 @@ set(VCPKG_TARGET_TRIPLET x64-windows-static-md)
 endif()
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
-project (Practice 
+project (Practice
     LANGUAGES CXX C
     VERSION 0.5.0)
 
@@ -35,7 +35,7 @@ MESSAGE(STATUS " CMakeLists: Practice")
 
 SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Set all compiler flags 
+# Set all compiler flags
 INCLUDE(cmake/all.cmake)
 #INCLUDE(utils/list.cmake)
 INCLUDE(advent_of_code/list.cmake)
@@ -51,15 +51,15 @@ INCLUDE_DIRECTORIES(
     ${CPP_INCLUDE}
     ${CMAKE_BINARY_DIR}
     ./
-    ) 
+    )
 
 ADD_EXECUTABLE (${PROJECT_NAME}_Cpp WIN32 ${CPP_SOURCE} ${CMAKE_CURRENT_LIST_DIR}/dpiawarescaling.manifest main.cpp common.h)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}_Cpp
-    opengl32 
+    opengl32
     SDL2::SDL2
     SDL2::SDL2main
-    implot::implot 
+    implot::implot
     MUtils::MUtils)
 
 SOURCE_GROUP (utils REGULAR_EXPRESSION "utils/.*")
@@ -67,6 +67,7 @@ SOURCE_GROUP (advent_of_code\\2017 REGULAR_EXPRESSION "advent_of_code/2017.*")
 SOURCE_GROUP (advent_of_code\\2018 REGULAR_EXPRESSION "advent_of_code/2018.*")
 SOURCE_GROUP (advent_of_code\\2019 REGULAR_EXPRESSION "advent_of_code/2019.*")
 SOURCE_GROUP (advent_of_code\\2020 REGULAR_EXPRESSION "advent_of_code/2020.*")
+SOURCE_GROUP (advent_of_code\\2022 REGULAR_EXPRESSION "advent_of_code/2022.*")
 SOURCE_GROUP (rosalind REGULAR_EXPRESSION "rosalind.*")
 SOURCE_GROUP (app\\app REGULAR_EXPRESSION "(main.cpp|common.h)")
 SOURCE_GROUP (app\\m3rdparty REGULAR_EXPRESSION "m3rdparty.*")
