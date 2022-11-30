@@ -86,7 +86,7 @@ public:
 
         if (ImGui::BeginMainMenuBar())
         {
-            if (ImGui::BeginMenu(fmt::format("FPS: {:.0f}", ImGui::GetIO().Framerate).c_str()))
+            if (ImGui::BeginMenu(fmt::format("FPS: {:.0f}",  ImGui::GetIO().Framerate).c_str()))
             {
                 ImGui::EndMenu();
             }
@@ -94,7 +94,7 @@ public:
         }
 
         bool open = true;
-        Profiler::ShowProfile(&open);
+        //Profiler::ShowProfile(&open);
 
         static int warmUp = 0;
         if (warmUp > 0)

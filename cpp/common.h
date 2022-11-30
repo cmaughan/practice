@@ -18,6 +18,9 @@ class Object
 {
 private:
 public:
+    Object()
+    {}
+
     static std::map<std::string, ObjectFactory*>& GetFactories()  
     {
         static std::map<std::string, ObjectFactory*> factories;
@@ -31,6 +34,10 @@ public:
     virtual void RunOnce() {};
     virtual void Run() {};
     virtual void DrawGUI() {};
+    virtual void SetName(const std::string& name) { m_name = name; }
+    virtual const std::string& GetName() const { return m_name; }
+
+    std::string m_name;
 };
 
 class ObjectFactory
@@ -47,7 +54,9 @@ public:
             Object::registerType(#klass, this); \
         } \
         virtual Object *create() { \
-            return new klass(); \
+            auto pObj = new klass(); \
+            pObj->SetName(#klass); \
+            return pObj; \
         } \
     }; \
     static klass##Factory global_##klass##Factory;
