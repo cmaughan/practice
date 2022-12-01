@@ -13,8 +13,8 @@ using namespace MUtils;
 
 namespace
 {
-    std::string part1;
-    std::string part2;
+    int part1;
+    int part2;
 }
 
 class AOC_2022_Day1 : public Object
@@ -23,26 +23,18 @@ class AOC_2022_Day1 : public Object
     {
         PROFILE_SCOPE(Solution)
 
-        auto input = string_get_integers(file_read(PRACTICE_ROOT "/advent_of_code/2022/inputs/day_1.txt"));
-
-        int count = 0;
-        container_test_pairs(input, [&](auto a, auto b)
+        std::vector<int> calories;
+        auto elves = string_split_delim_string(file_read(PRACTICE_ROOT "/advent_of_code/2022/inputs/day_1.txt"), "\n\n");
+        for (auto& line : elves)
         {
-            if ((a + b) == 2020) {
-                part1 = std::to_string(a * b);
-                return false;
-            }
-            return true;
-        });
+            auto elf = string_get_integers(line);
+            auto cal = std::accumulate(elf.begin(), elf.end(), 0);
+            calories.push_back(cal);
+        }
+        std::sort(calories.begin(), calories.end());
 
-        container_test_triples(input, [&](auto a, auto b, auto c)
-        {
-            if ((a + b + c) == 2020) {
-                part2 = std::to_string(a * b * c);
-                return false;
-            }
-            return true;
-        });
+        part1 = calories.back();
+        part2 = std::accumulate(calories.end() - 3, calories.end(), 0);
     }
 
     virtual void DrawGUI() override
