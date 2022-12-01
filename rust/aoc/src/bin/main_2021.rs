@@ -1,8 +1,9 @@
 #![feature(hash_drain_filter)]
-#![feature(iter_array_chunks)]
 
 mod year_2021;
+mod year_2022;
 use year_2021::{*};
+use year_2022::{*};
 
 aoc_main::main! {
     year 2021;
@@ -22,4 +23,6 @@ aoc_main::main! {
     day14: generator => part1, part1_slow, part2;
     day15: generator => part1, part2;
     day16: generator => part1, part2;
+    year 2022;
+    day1  => part1, part2;
 }
