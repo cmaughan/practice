@@ -8,6 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug executable 'aoc_2022'",
+            "console": "internalConsole",
             "cargo": {
                 "args": [
                     "build",
