@@ -26,11 +26,11 @@ class AOC_2022_Day4 : public Object
         auto rows = string_split_lines(file_read(PRACTICE_ROOT "/advent_of_code/2022/inputs/day_4.txt"));
 
         auto a_in_b = [](std::pair<int, int>& a, std::pair<int, int>& b) {
-            return (a.first >= b.first && a.second <= b.second)
+            return (a.first >= b.first && a.second <= b.second);
         };
 
         auto a_overlap_b = [](std::pair<int, int>& a, std::pair<int, int>& b) {
-            return (a.first <= b.second && a.second >= b.first)
+            return (a.first <= b.second && a.second >= b.first);
         };
 
         for (auto& row : rows)
