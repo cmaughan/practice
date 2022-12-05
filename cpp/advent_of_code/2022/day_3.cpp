@@ -27,7 +27,7 @@ class AOC_2022_Day3 : public Object
 
         auto toScore = [](int v) { return v < 'a' ? ((v - 'A') + 27) : ((v - 'a') + 1); };
 
-        auto search = [&](auto itr, auto itrEnd, auto count) {
+        auto search = [&](auto itr, auto count) {
             std::vector<std::unordered_set<char>> sets;
             for (auto i = itr; i < itr + count; i++)
             {
