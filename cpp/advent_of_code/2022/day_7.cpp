@@ -244,7 +244,10 @@ class AOC_2022_Day7 : public Object
             return (val.second >= required);
         });
 
-        part2 = *filtered.begin();
+        if (!filtered.empty())
+        {
+            part2 = *filtered.begin();
+        }
     }
 
     virtual void DrawGUI() override
