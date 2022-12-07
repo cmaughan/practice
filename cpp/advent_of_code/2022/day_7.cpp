@@ -3,8 +3,9 @@
 #include <algorithm>
 #include <deque>
 #include <mutils/time/profiler.h>
+#include <mutils/algorithm/container_utils.h>
 #include <numeric>
-#include <unordered_set>
+#include <set>
 
 #include <imgui.h>
 
@@ -15,24 +16,25 @@ using namespace MUtils;
 
 namespace
 {
-uint64_t part1;
-uint64_t part2;
+int64_t part1;
+int64_t part2;
 std::ostringstream str;
 } // namespace
 
 struct file
 {
-    uint64_t size = 0;
+    int64_t size = 0;
     std::string name;
 };
+
 
 struct folder
 {
     std::vector<folder> children;
     folder* pParent = nullptr;
     std::string name;
-    std::uint64_t localFileSize = 0;
-    std::uint64_t allChildrenSize = 0;
+    std::int64_t localFileSize = 0;
+    std::int64_t allChildrenSize = 0;
     std::vector<file> files;
 };
 
@@ -62,7 +64,7 @@ void print_folder(std::ostringstream& str, folder* pFolder, uint32_t i)
 
 class AOC_2022_Day7 : public Object
 {
-    virtual void RunOnce() override
+    /*virtual void RunOnce() override
     {
         PROFILE_SCOPE(Solution);
 
@@ -153,10 +155,10 @@ class AOC_2022_Day7 : public Object
         uint64_t small_ones = 0;
         uint64_t nearest_dist = std::numeric_limits<uint64_t>::max();
         folder* pDeleteFolder = nullptr;
-        
+
         using fnSearch = std::function<void(folder*, uint32_t indent)>;
         fnSearch finder = [&](auto pFolder, uint32_t indent) {
-            
+
             print_folder(str, pFolder, indent);
 
             if (pFolder->allChildrenSize <= 100000)
@@ -184,6 +186,65 @@ class AOC_2022_Day7 : public Object
         finder(&root, 0);
         part1 = small_ones;
         part2 = pDeleteFolder->allChildrenSize;
+    }
+    */
+
+    virtual void RunOnce() override
+    {
+        auto input = string_split_lines(file_read(PRACTICE_ROOT "/advent_of_code/2022/inputs/day_7.txt"));
+
+        std::vector<std::string> folders = { "/" };
+        std::map<std::string, int64_t> sizes;
+        for (auto row : input)
+        {
+            auto values = string_split(row, " ");
+            if (values[0] == "$" && values[1] == "cd")
+            {
+                switch (values[2][0])
+                {
+                case '.':
+                    if (!folders.empty())
+                    {
+                        folders.pop_back();
+                    }
+                    break;
+                case '/':
+                    folders.clear(); // Fall through
+                default:
+                    folders.push_back(values[2]);
+                    break;
+                }
+            }
+            else
+            {
+                if (values[0] != "$" && values[0][0] != 'd')
+                {
+                    std::ostringstream key;
+                    for (auto& str : folders)
+                    {
+                        key << str;
+                        sizes[key.str()] += std::stoull(values[0]);
+                    }
+                }
+            }
+        }
+
+        // Add all <= 100000
+        part1 = std::accumulate(sizes.begin(), sizes.end(), 0ll, [](auto current_total, auto pr) {
+            if (pr.second <= 100000)
+            {
+                return current_total + pr.second;
+            }
+            return current_total;
+        });
+
+        // Find all big enough to make room, sorted into a set
+        const auto required = 30000000 - (70000000 - sizes["/"]);
+        auto filtered = filter_map_to_set(sizes, [&](auto val) {
+            return (val.second >= required);
+        });
+
+        part2 = *filtered.begin();
     }
 
     virtual void DrawGUI() override
