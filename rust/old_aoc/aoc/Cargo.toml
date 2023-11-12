@@ -1,0 +1,16 @@
+[package]
+name = "aoc"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+aoc-main = { path = "../aoc_runner", features=["bench"] }
+gifski = "1.5.1"
+itermore = "0.2.0"
+itertools = "0.10.3"
+lazy_static = "1.4.0"
+nannou = "0.18.1"
+ndarray = "0.15.4"
