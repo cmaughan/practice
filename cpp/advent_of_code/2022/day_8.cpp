@@ -29,6 +29,7 @@ class AOC_2022_Day8 : public Object
 {
     virtual void RunOnce() override
     {
+        /*
         const auto input = string_get_integer_grid(file_read(PRACTICE_ROOT "/advent_of_code/2022/inputs/day_8.txt"), "");
         width = input[0].size();
         height = input.size();
@@ -74,6 +75,7 @@ class AOC_2022_Day8 : public Object
         }
         part1 += uint32_t(width + height + width + height - 4);
         part2 = currentScenic;
+        */
     }
 
     virtual void DrawGUI() override
