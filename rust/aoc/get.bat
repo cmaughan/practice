@@ -1,0 +1,1 @@
+aoc download --day %1 --year 2022 --input-only --input-file inputs/%1.in
